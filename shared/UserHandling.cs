@@ -15,6 +15,14 @@ namespace Eloise.shared
             _context = context;
         }
 
+        public bool registerUser(User user)
+        {
+            user.password = MyHelpers.HashPassword(user.password);
+            _context.User.Add(user);
+            _context.SaveChanges();
+            return true;
+        }
+
         public User[] getUsers()
         {
             return _context.User.ToArray();

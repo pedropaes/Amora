@@ -31,5 +31,31 @@ namespace Eloise.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult RegisterUser([Bind] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                bool RegistrationStatus = this.userHandling.registerUser(user);
+                if (RegistrationStatus)
+                {
+                    ModelState.Clear();
+                    TempData["Success"] = "Registration Successful!";
+                }
+                else
+                {
+                    TempData["Fail"] = "This User ID already exists. Registration Failed.";
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UserLogin()
+        {
+
+            return View();
+        }
     }
 }
