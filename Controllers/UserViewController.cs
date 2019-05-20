@@ -25,5 +25,11 @@ namespace Eloise.Controllers
             User[] users = userHandling.getUsers();
             return View(users);
         }
+
+        [HttpGet]
+        public IActionResult RegisterUser()
+        {
+            return View();
+        }
     }
 }

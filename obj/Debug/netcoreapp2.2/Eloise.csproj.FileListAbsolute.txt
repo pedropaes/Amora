@@ -29,3 +29,5 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.dll
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.pdb
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.csproj.CopyComplete
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\UserView\getUsers.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\UserView\RegisterUser.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\UserView\UserLogin.g.cshtml.cs

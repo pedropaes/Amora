@@ -2,8 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">Hello World</h1>
-        <a asp-controller="UserView" asp-action="getUsers">Ver utilizadores</a>
-
-    </div>
+<div class="text-center">
+<h1 class="display-4">Home Page</h1>
+<p>
+    <a asp-controller="UserView" asp-action="getUsers">Ver utilizadores</a>
+</p>
+<p>
+    <a asp-controller="UserView" asp-action="RegisterUser">Registo</a>
+</p>
+<p><a asp-controller="UserView" asp-action="UserLogin">Login</a></p>
+</div>
