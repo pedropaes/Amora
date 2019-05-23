@@ -22,7 +22,17 @@ namespace Eloise.shared
             _context.SaveChanges();
             return true;
         }
+        public bool validateUser(User user)
+        {
+            user.password = MyHelpers.HashPassword(user.password);
+            var returnedUser = _context.User.Where(b => b.email == user.email && b.password == user.password).FirstOrDefault();
 
+            if (returnedUser == null)
+            {
+                return false;
+            }
+            return true;
+        }
         public User[] getUsers()
         {
             return _context.User.ToArray();

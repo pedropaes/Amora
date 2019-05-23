@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Eloise.Models;
 using Eloise.shared;
-
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Eloise.Controllers
 {
@@ -55,6 +56,35 @@ namespace Eloise.Controllers
         public IActionResult UserLogin()
         {
 
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UserLogin([Bind] User user)
+        {
+            ModelState.Remove("nome");
+            ModelState.Remove("email");
+
+            if (ModelState.IsValid)
+            {
+                var LoginStatus = this.userHandling.validateUser(user);
+                if (LoginStatus)
+                {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, user.email)
+                    };
+                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                    await HttpContext.SignInAsync(principal);
+                    return RedirectToAction("getUsers", "UserView");
+                }
+                else
+                {
+                    TempData["UserLoginFailed"] = "Login Failed.Please enter correct credentials";
+                }
+            }
             return View();
         }
     }
