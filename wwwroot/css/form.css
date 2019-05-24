@@ -24,8 +24,8 @@ form {
 
     form .svgContainer {
         position: relative;
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         margin: 0 auto 1em;
         border-radius: 50%;
         pointer-events: none;
@@ -75,7 +75,7 @@ form {
     form label {
         margin: 0 0 12px;
         display: block;
-        font-size: 1.25em;
+        font-size: 1em;
         color: #217093;
         font-weight: 700;
         font-family: inherit;
@@ -116,7 +116,7 @@ form {
         box-sizing: border-box;
         box-shadow: none;
         width: 100%;
-        height: 25px;
+        height: 65px;
         font-size: 1.55em;
         color: #FFF;
         font-weight: 600;

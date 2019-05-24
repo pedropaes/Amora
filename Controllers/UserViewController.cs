@@ -88,7 +88,7 @@ namespace Eloise.Controllers
                 }
                 else
                 {
-                    TempData["UserLoginFailed"] = "Login Failed.Please enter correct credentials";
+                    TempData["UserLoginFailed"] = "Login Failed. Please enter correct credentials";
 
                 }
                 
