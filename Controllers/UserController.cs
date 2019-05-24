@@ -24,7 +24,6 @@ namespace Eloise.Controllers
         {
             return _context.User.ToArray();
            
-            
         }
 
 

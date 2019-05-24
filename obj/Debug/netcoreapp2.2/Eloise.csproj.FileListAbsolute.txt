@@ -36,3 +36,8 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Del
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Details.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Edit.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Create.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Delete.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Details.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Edit.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Index.g.cshtml.cs

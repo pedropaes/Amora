@@ -11,27 +11,36 @@ namespace Eloise.Models
     {
         [Key]
         public int id { set; get; }
+
         [Required]
         [StringLength(50)]
         public string descricao { set; get; }
+
         [Required]
         [StringLength(50)]
         public string regime { set; get; }
+
         [Required]
         [StringLength(50)]
         public string tipo { set; get; }
 
+        [Required]
         [StringLength(50)]
         public string dificuldade { set; get; }
 
+        [Required]
         [DataType(DataType.Time)]
         public TimeSpan tempo { set; get; }
 
-        [StringLength(50)]
-        public string valor { set; get; }
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        public int valor { set; get; }
 
-        [StringLength(50)]
-        public string dose { set; get; }
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        public int dose { set; get; }
+
+        public virtual ICollection<Passo> passos { get; set; }
     }
 
     public class ReceitaContext : DbContext
@@ -42,5 +51,15 @@ namespace Eloise.Models
         }
 
         public DbSet<Receita> Receita { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Passo>()
+                    .HasKey(x => x.id_receita);
+        }
+
+
+        public DbSet<Receita> receita { get; set; }
+        public DbSet<Models.Passo> passo { get; set; }
     }
 }
