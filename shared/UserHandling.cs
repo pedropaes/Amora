@@ -33,6 +33,11 @@ namespace Eloise.shared
             }
             return true;
         }
+        public User getUser(string email)
+        {
+           User u = _context.User.Where(b => b.email == email).FirstOrDefault();
+           return u;
+        }
         public User[] getUsers()
         {
             return _context.User.ToArray();

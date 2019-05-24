@@ -7,6 +7,8 @@ using Eloise.Models;
 using Eloise.shared;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using System.Net;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Eloise.Controllers
 {
@@ -68,24 +70,37 @@ namespace Eloise.Controllers
             if (ModelState.IsValid)
             {
                 var LoginStatus = this.userHandling.validateUser(user);
+                User u = this.userHandling.getUser(user.email);
+                
                 if (LoginStatus)
                 {
+                   
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Email, user.email)
+                        new Claim(ClaimTypes.Name, u.nome),
+                        new Claim(ClaimTypes.Role, u.tipo)
                     };
-                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsIdentity userIdentity = new ClaimsIdentity("login");
+                    userIdentity.AddClaims(claims);
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
-
                     await HttpContext.SignInAsync(principal);
-                    return RedirectToAction("getUsers", "UserView");
+                    return RedirectToAction("index", "Home");
                 }
                 else
                 {
                     TempData["UserLoginFailed"] = "Login Failed.Please enter correct credentials";
+
                 }
+                
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("index", "Home");
         }
     }
 }

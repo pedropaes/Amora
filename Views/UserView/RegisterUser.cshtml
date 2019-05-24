@@ -18,11 +18,6 @@
     <form asp-action="RegisterUser">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="id" class="control-label"></label>
-            <input asp-for="id" class="form-control" />
-            <span asp-validation-for="id" class="text-danger"></span>
-        </div>
-        <div class="form-group">
             <label asp-for="nome" class="control-label"></label>
             <input asp-for="nome" class="form-control" />
             <span asp-validation-for="nome" class="text-danger"></span>
@@ -46,6 +41,7 @@
                 <option value="Vegan">Vegan</option>
             </select>
         </div>
+        <input asp-for="tipo" type="hidden" value="user" >
         <div class="form-group">
             <input type="submit" value="Register" class="btn btn-default btn-primary" />
         </div>

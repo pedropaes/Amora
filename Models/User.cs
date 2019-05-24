@@ -24,6 +24,10 @@ namespace Eloise.Models
         [StringLength(50)]
         public string regime { set; get; }
 
+       
+        [StringLength(50)]
+        public string tipo { set; get; }
+
     }
 
     public class UserContext : DbContext
