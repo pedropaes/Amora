@@ -27,16 +27,9 @@ namespace Eloise.shared
         }
         public Receita getReceita(int id)
         {
-            //IEnumerable<Passo> passos = new List<Passo>();
             var recipe = _context.Receita.Find(id);
-            //var passos = _context.passo.Where(b => b.id_receita == id);
-            //recipe.passos = passos;
-            /*
-            List<Passo> lista = _context.Receita.Include(x => x.passos)
-                passos.Include(x => x.)
-            return recipe;*/
 
-            var passos = _context.passo.Where(s => s.receitaid == id);
+            var passos = _context.passo.Where(s => s.receitaid == recipe.id);
             foreach (Models.Passo t in passos)
             {
                 recipe.passos.Add(t);

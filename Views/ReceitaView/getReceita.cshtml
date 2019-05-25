@@ -8,16 +8,16 @@
                 @Html.DisplayFor(modelItem => Model.descricao)
             </th>
             <th>
-                
+
             </th>
             <th>
-                
+
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td  class="table-info">
+            <td class="table-info">
                 <img src="~/images/@Html.DisplayFor(modelItem => Model.imagem)" alt="@Html.DisplayFor(modelItem => Model.descricao)">
             </td>
             <td class="table-info">
@@ -29,10 +29,33 @@
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => Model.dose)</p>
                 <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => Model.passos )</p>
             </td>
-            <td  class="table-info">
-            </td>
+            <td class="table-info"></td>
 
         </tr>
 
     </tbody>
 </table>
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>
+                <b>Preparação</b>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.passos)
+        {
+        <tr>
+            <td class="table-info">
+                <p align="left"><b>@Html.DisplayFor(modelItem => item.numero)</b>@Html.DisplayFor(modelItem => item.tecnica) </p>
+            </td>
+        </tr>
+                }
+           
+
+        </tbody>
+</table>
+

@@ -63,7 +63,7 @@ namespace Eloise.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Passo>().HasKey(t => new { t.receitaid, t.id_ingrediente });
+            modelBuilder.Entity<Passo>().HasKey(t => new { t.receitaid, t.ingredienteid });
 
 
         }

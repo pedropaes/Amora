@@ -28,6 +28,8 @@ namespace Eloise.Models
         [StringLength(50)]
         public string tipo { set; get; }
 
+        //public virtual ICollection<Receita> favoritos { get; set; }
+
     }
 
     public class UserContext : DbContext
@@ -40,5 +42,12 @@ namespace Eloise.Models
 
 
         public DbSet<User> User { get; set; }
+        public DbSet<User> Receita { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           // modelBuilder.Entity<Receita>().HasKey(t => new { t.receitaid, t.ingredienteid });
+
+
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace Eloise.Models
         [StringLength(250)]
         public string tecnica { set; get; }
 
+        [Required]
+        public int numero { set; get; }
         public virtual Receita receita { set; get; }
     }
     public class PassoContext : DbContext
