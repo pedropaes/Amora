@@ -15,7 +15,7 @@ namespace Eloise.Models
         public int receitaid { set; get; }
 
         [Key]
-        public int id_ingrediente { set; get; }
+        public int ingredienteid { set; get; }
         [Required]
         [StringLength(250)]
         public string tecnica { set; get; }
