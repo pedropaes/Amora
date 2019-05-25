@@ -36,8 +36,11 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Del
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Details.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Edit.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Index.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Create.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Delete.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Details.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Edit.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receita\Index.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\UserView\getReceitas.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaView\getReceitas.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Create.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Delete.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Details.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Edit.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Index.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaView\getReceita.g.cshtml.cs

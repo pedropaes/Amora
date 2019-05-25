@@ -17,16 +17,23 @@ namespace Eloise.Controllers
     {
 
         private UserHandling userHandling;
+        private ReceitaHandling receitaHandling;
         public UserViewController(UserContext context)
         {
             //_context = context;
             userHandling = new UserHandling(context);
+            //receitaHandling = new ReceitaHandling();
         }
 
         public IActionResult getUsers()
         {
             User[] users = userHandling.getUsers();
             return View(users);
+        }
+        public IActionResult getReceitas()
+        {
+            Receita[] receitas = receitaHandling.getReceitas();
+            return View(receitas);
         }
 
         [HttpGet]

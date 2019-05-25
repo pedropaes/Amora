@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,15 +11,28 @@ namespace Eloise.Models
     public class Passo
     {
         [Key]
-        public int id_receita { set; get; }
+        
+        public int receitaid { set; get; }
 
         [Key]
         public int id_ingrediente { set; get; }
         [Required]
         [StringLength(250)]
         public string tecnica { set; get; }
-        [Required]
-        [Range(0, float.MaxValue, ErrorMessage = "Please enter valid float Number")]
-        public float data { set; get; }
+
+        public virtual Receita receita { set; get; }
+    }
+    public class PassoContext : DbContext
+    {
+        public PassoContext(DbContextOptions<PassoContext> options)
+            : base(options)
+        {
+        }
+
+
+        public DbSet<Passo> Receita { get; set; }
+
+
+        public DbSet<Passo> Passo { get; set; }
     }
 }

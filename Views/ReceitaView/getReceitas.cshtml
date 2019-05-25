@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Eloise.Models.Receita>
+
+
+@foreach (var item in Model) {
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </th>
+            <th>
+                
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td  class="table-info">
+                <img src="~/images/@Html.DisplayFor(modelItem => item.imagem)" alt="@Html.DisplayFor(modelItem => item.descricao)">
+            </td>
+            <td class="table-info">
+                <p align="left"><b>Regime:</b> @Html.DisplayFor(modelItem => item.regime)</p>
+                <p align="left"><b>Tipo:</b> @Html.DisplayFor(modelItem => item.tipo)</p>
+                <p align="left"><b>Tempo de confeção:</b> @Html.DisplayFor(modelItem => item.tempo)</p>
+                <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => item.dose) pessoas</p>
+                <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => item.classificacao) de 5</p>
+                <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => item.dose)</p>
+                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => item.passos )</p>
+            </td>
+            <td  class="table-info">
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
+}

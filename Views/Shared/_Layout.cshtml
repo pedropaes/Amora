@@ -34,9 +34,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
-                        </li>
+
                         @if (User.Identity.IsAuthenticated)
                         {
 
@@ -44,6 +42,9 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Gerir Utilizadores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ReceitaAdmin" asp-action="Index">Gerir Receitas</a>
                                 </li>
                             }
                             else
@@ -58,7 +59,9 @@
                                 </li>
                             }
                         }
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="navbar-collapse collapse order-3 dual-collapse2">

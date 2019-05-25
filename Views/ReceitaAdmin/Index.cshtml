@@ -33,6 +33,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.dose)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.classificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imagem)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -59,6 +65,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.classificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imagem)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

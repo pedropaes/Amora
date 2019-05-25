@@ -9,23 +9,22 @@ using Eloise.Models;
 
 namespace Eloise.Controllers
 {
-    [Route("api/[controller]")]
-    public class ReceitaController : Controller
+    public class ReceitaAdminController : Controller
     {
         private readonly ReceitaContext _context;
 
-        public ReceitaController(ReceitaContext context)
+        public ReceitaAdminController(ReceitaContext context)
         {
             _context = context;
         }
 
-        // GET: Receita
+        // GET: ReceitaAdmin
         public async Task<IActionResult> Index()
         {
             return View(await _context.Receita.ToListAsync());
         }
 
-        // GET: Receita/Details/5
+        // GET: ReceitaAdmin/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,18 +42,18 @@ namespace Eloise.Controllers
             return View(receita);
         }
 
-        // GET: Receita/Create
+        // GET: ReceitaAdmin/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Receita/Create
+        // POST: ReceitaAdmin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose")] Receita receita)
+        public async Task<IActionResult> Create([Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose,classificacao,imagem")] Receita receita)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +64,7 @@ namespace Eloise.Controllers
             return View(receita);
         }
 
-        // GET: Receita/Edit/5
+        // GET: ReceitaAdmin/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +80,12 @@ namespace Eloise.Controllers
             return View(receita);
         }
 
-        // POST: Receita/Edit/5
+        // POST: ReceitaAdmin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose")] Receita receita)
+        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose,classificacao,imagem")] Receita receita)
         {
             if (id != receita.id)
             {
@@ -116,7 +115,7 @@ namespace Eloise.Controllers
             return View(receita);
         }
 
-        // GET: Receita/Delete/5
+        // GET: ReceitaAdmin/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +133,7 @@ namespace Eloise.Controllers
             return View(receita);
         }
 
-        // POST: Receita/Delete/5
+        // POST: ReceitaAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

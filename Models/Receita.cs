@@ -40,6 +40,14 @@ namespace Eloise.Models
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public int dose { set; get; }
 
+        [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter valid doubleNumber")]
+        public double classificacao { set; get; }
+
+        [Required]
+        [StringLength(50)]
+        public string imagem { set; get; }
+
         public virtual ICollection<Passo> passos { get; set; }
     }
 
@@ -50,16 +58,15 @@ namespace Eloise.Models
         {
         }
 
+
         public DbSet<Receita> Receita { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Passo>()
-                    .HasKey(x => x.id_receita);
+            modelBuilder.Entity<Passo>().HasKey(t => new { t.receitaid, t.id_ingrediente });
+
+
         }
-
-
-        public DbSet<Receita> receita { get; set; }
         public DbSet<Models.Passo> passo { get; set; }
     }
 }

@@ -2,15 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-<h1 class="display-4">Home Page</h1>
-<p>
-    <a asp-controller="UserView" asp-action="getUsers">Ver utilizadores</a>
-</p>
-<p>
-    <a asp-controller="UserView" asp-action="RegisterUser">Registo</a>
-</p>
-<p>
-    <a asp-controller="UserView" asp-action="UserLogin">Login</a>
-    </p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Home Page</h1>
+        <p>
+            <a asp-controller="UserView" asp-action="getUsers">Ver utilizadores</a>
+        </p>
+        <p>
+            <a asp-controller="UserView" asp-action="RegisterUser">Registo</a>
+        </p>
+        <p>
+            <a asp-controller="ReceitaView" asp-action="getReceitas">Ver Receitas</a>
+        </p>
+        <p>
+            <a asp-controller="ReceitaView" asp-action="getReceita">Ver Receita 1</a>
+        </p>
+    </div>
