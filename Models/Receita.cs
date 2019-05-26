@@ -51,6 +51,8 @@ namespace Eloise.Models
         public virtual ICollection<Passo> passos { get; set; }
 
         public virtual ICollection<IngredienteReceita> ingredientes { get; set; }
+
+        
     }
     public class Passo
     {
@@ -61,12 +63,16 @@ namespace Eloise.Models
         [Key]
         public int ingredienteid { set; get; }
         [Required]
+        [StringLength(50)]
+        public string quantidade { set; get; }
+        [Required]
         [StringLength(250)]
         public string tecnica { set; get; }
 
         [Required]
         public int numero { set; get; }
         public virtual Receita receita { set; get; }
+
     }
 
     public class Ingrediente
@@ -113,13 +119,13 @@ namespace Eloise.Models
         public DbSet<Receita> Receita { get; set; }
         public DbSet<Passo> passo { get; set; }
 
-        public DbSet<IngredienteReceita> Ingredientes { get; set; }
+        public DbSet<IngredienteReceita> ingrediente { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Passo>().HasKey(t => new { t.receitaid, t.ingredienteid });
             modelBuilder.Entity<IngredienteReceita>().HasKey(t => new { t.ingredienteid, t.receitaid });
-
+            /*
             modelBuilder.Entity<IngredienteReceita>()
                         .HasOne(t => t.ingrediente)
                         .WithMany(t => t.receitas )
@@ -130,11 +136,11 @@ namespace Eloise.Models
                         .HasOne(t => t.receita)
                         .WithMany(t => t.ingredientes)
                         .HasForeignKey(t => t.receitaid);
-
+              */          
         }
         
     }
-
+    
     public class PassoContext : DbContext
     {
         public PassoContext(DbContextOptions<PassoContext> options)
@@ -143,7 +149,7 @@ namespace Eloise.Models
         }
 
 
-        public DbSet<Passo> Receita { get; set; }
+        public DbSet<Receita> Receita { get; set; }
 
 
         public DbSet<Passo> Passo { get; set; }
@@ -157,7 +163,7 @@ namespace Eloise.Models
         }
 
 
-        public DbSet<Passo> Receita { get; set; }
+        public DbSet<Receita> Receita { get; set; }
 
 
         public DbSet<Passo> Passo { get; set; }
@@ -169,9 +175,25 @@ namespace Eloise.Models
             : base(options)
         {
         }
-        public DbSet<Passo> Receita { get; set; }
+        public DbSet<Receita> Receita { get; set; }
 
 
         public DbSet<Passo> Passo { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<IngredienteReceita>()
+                        .HasOne(t => t.ingrediente)
+                        .WithMany(t => t.receitas)
+                        .HasForeignKey(t => t.ingredienteid);
+
+
+            modelBuilder.Entity<IngredienteReceita>()
+                        .HasOne(t => t.receita)
+                        .WithMany(t => t.ingredientes)
+                        .HasForeignKey(t => t.receitaid);
+
+        }
     }
 }

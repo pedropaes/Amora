@@ -27,7 +27,8 @@
                 <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => Model.dose) pessoas</p>
                 <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => Model.classificacao) de 5</p>
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => Model.dose)</p>
-                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => Model.passos )</p>
+                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => Model.passos.Count)</p>
+                <p align="left"><b>Ingredientes:</b> @Html.DisplayFor(modelItem => Model.ingredientes.Count)</p>
             </td>
             <td class="table-info"></td>
 
@@ -50,7 +51,7 @@
         {
         <tr>
             <td class="table-info">
-                <p align="left"><b>@Html.DisplayFor(modelItem => item.numero)</b>@Html.DisplayFor(modelItem => item.tecnica) </p>
+                <p align="left"><b>@Html.DisplayFor(modelItem => item.numero). </b>@Html.DisplayFor(modelItem => item.tecnica) </p>
             </td>
         </tr>
                 }

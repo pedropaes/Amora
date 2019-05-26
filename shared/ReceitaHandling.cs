@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Eloise.Models;
@@ -31,16 +32,21 @@ namespace Eloise.shared
 
             var passos = _context.passo.Where(s => s.receitaid == recipe.id);
 
-            var ingredientes = _context.Ingredientes.Where(s => s.receitaid == recipe.id);
+            //List<IngredienteReceita> lista = _context.ingrediente.Where(s => s.receitaid == recipe.id).ToList();
+
 
             foreach (Passo t in passos)
             {
                 recipe.passos.Add(t);
             }
+            
+            ICollection<Ingrediente> lista = _context.ingrediente.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente).ToList();
+            //Debug.Print(lista.Count.ToString());
+
             /*
-            foreach (Ingrediente i in ingredientes)
+            foreach (IngredienteReceita i in lista)
             {
-                recipe.passos.Add(t);
+                recipe.ingredientes.Add(i);
             }*/
 
             return recipe;
