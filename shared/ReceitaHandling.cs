@@ -30,10 +30,19 @@ namespace Eloise.shared
             var recipe = _context.Receita.Find(id);
 
             var passos = _context.passo.Where(s => s.receitaid == recipe.id);
-            foreach (Models.Passo t in passos)
+
+            var ingredientes = _context.Ingredientes.Where(s => s.receitaid == recipe.id);
+
+            foreach (Passo t in passos)
             {
                 recipe.passos.Add(t);
             }
+            /*
+            foreach (Ingrediente i in ingredientes)
+            {
+                recipe.passos.Add(t);
+            }*/
+
             return recipe;
 
         }
