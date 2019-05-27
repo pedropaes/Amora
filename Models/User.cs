@@ -45,7 +45,7 @@ namespace Eloise.Models
         public DbSet<User> Receita { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // modelBuilder.Entity<Receita>().HasKey(t => new { t.receitaid, t.ingredienteid });
+          
 
 
         }

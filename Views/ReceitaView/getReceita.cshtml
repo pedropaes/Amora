@@ -28,7 +28,7 @@
                 <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => Model.classificacao) de 5</p>
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => Model.dose)</p>
                 <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => Model.passos.Count)</p>
-                <p align="left"><b>Ingredientes:</b> @Html.DisplayFor(modelItem => Model.ingredientes.Count)</p>
+                
             </td>
             <td class="table-info"></td>
 
@@ -49,14 +49,22 @@
 
         @foreach (var item in Model.passos)
         {
-        <tr>
-            <td class="table-info">
-                <p align="left"><b>@Html.DisplayFor(modelItem => item.numero). </b>@Html.DisplayFor(modelItem => item.tecnica) </p>
-            </td>
-        </tr>
-                }
-           
+            <tr>
+                <td class="table-info">
+                    <p align="left"><b>@Html.DisplayFor(modelItem => item.numero). </b>@Html.DisplayFor(modelItem => item.tecnica) </p>
+                </td>
+            </tr>
+        }
+        @foreach (var item in Model.ingredientex)
+        {
+            <tr>
+                <td class="table-info">
+                    <p align="left"><b>@Html.DisplayFor(modelItem => item.descricao). </b>@Html.DisplayFor(modelItem => item.quantidade) </p>
+                </td>
+            </tr>
+        }
 
-        </tbody>
+
+    </tbody>
 </table>
 

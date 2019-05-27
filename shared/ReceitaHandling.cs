@@ -32,23 +32,20 @@ namespace Eloise.shared
 
             var passos = _context.passo.Where(s => s.receitaid == recipe.id);
 
-            //List<IngredienteReceita> lista = _context.ingrediente.Where(s => s.receitaid == recipe.id).ToList();
-
-
+            //IEnumerable <Ingrediente> ingredientes = _context.ingredientes.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente);
+            recipe.ingredientex = _context.ingredientes.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente);
+            //Debug.Print(ingredientes.Count().ToString());
             foreach (Passo t in passos)
             {
                 recipe.passos.Add(t);
             }
             
-            ICollection<Ingrediente> lista = _context.ingrediente.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente).ToList();
-            //Debug.Print(lista.Count.ToString());
-
-            /*
-            foreach (IngredienteReceita i in lista)
+        /*
+            foreach (Ingrediente i in ingredientes)
             {
-                recipe.ingredientes.Add(i);
-            }*/
-
+                recipe.ingredientex.Add(i);
+            }
+            */
             return recipe;
 
         }
