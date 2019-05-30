@@ -18,7 +18,7 @@ namespace Eloise.Controllers
 
         private UserHandling userHandling;
         
-        public UserViewController(UserContext context)
+        public UserViewController(EloiseContext context)
         {
            
             userHandling = new UserHandling(context);

@@ -27,10 +27,8 @@ namespace Eloise
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = @"Server=DESKTOP-CO04L4A\SQLEXPRESS;Database=Eloise;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<ReceitaContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<PassoContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<IngredienteReceitaContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<EloiseContext>(options => options.UseSqlServer(connection));
+          
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
         {

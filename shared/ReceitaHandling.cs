@@ -9,8 +9,8 @@ namespace Eloise.shared
 {
     public class ReceitaHandling
     {
-        private readonly ReceitaContext _context;
-        public ReceitaHandling(ReceitaContext context)
+        private readonly EloiseContext _context;
+        public ReceitaHandling(EloiseContext context)
         {
             _context = context;
         }
@@ -30,10 +30,10 @@ namespace Eloise.shared
         {
             var recipe = _context.Receita.Find(id);
 
-            var passos = _context.passo.Where(s => s.receitaid == recipe.id);
+            var passos = _context.Passo.Where(s => s.receitaid == recipe.id);
 
             //IEnumerable <Ingrediente> ingredientes = _context.ingredientes.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente);
-            recipe.ingredientex = _context.ingredientes.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente);
+            //recipe.ingredientex = _context.Ingredientes.Where(ri => ri.receita.id == recipe.id).Select(i => i.ingrediente);
             //Debug.Print(ingredientes.Count().ToString());
             foreach (Passo t in passos)
             {

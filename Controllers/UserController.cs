@@ -12,11 +12,11 @@ namespace Eloise.Controllers
     public class UserController : Controller
     {
 
-        private readonly UserContext _context;
+        private readonly EloiseContext _context;
        
-        public UserController(UserContext context)
+        public UserController(EloiseContext context)
         {
-            _context = context;
+            _context = context; 
         }
 
         [HttpGet]

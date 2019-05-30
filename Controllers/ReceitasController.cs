@@ -9,22 +9,22 @@ using Eloise.Models;
 
 namespace Eloise.Controllers
 {
-    public class AdminController : Controller
+    public class ReceitasController : Controller
     {
         private readonly EloiseContext _context;
 
-        public AdminController(EloiseContext context)
+        public ReceitasController(EloiseContext context)
         {
             _context = context;
         }
 
-        // GET: Admin
+        // GET: Receitas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            return View(await _context.Receita.ToListAsync());
         }
 
-        // GET: Admin/Details/5
+        // GET: Receitas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace Eloise.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var receita = await _context.Receita
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (user == null)
+            if (receita == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(receita);
         }
 
-        // GET: Admin/Create
+        // GET: Receitas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Receitas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nome,email,password,regime,tipo")] User user)
+        public async Task<IActionResult> Create([Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose,classificacao,imagem")] Receita receita)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(receita);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(receita);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Receitas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace Eloise.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var receita = await _context.Receita.FindAsync(id);
+            if (receita == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(receita);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Receitas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nome,email,password,regime,tipo")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,regime,tipo,dificuldade,tempo,valor,dose,classificacao,imagem")] Receita receita)
         {
-            if (id != user.id)
+            if (id != receita.id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Eloise.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(receita);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.id))
+                    if (!ReceitaExists(receita.id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace Eloise.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(receita);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Receitas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,59 @@ namespace Eloise.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var receita = await _context.Receita
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (user == null)
+            if (receita == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(receita);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Receitas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
+            var receita = await _context.Receita.FindAsync(id);
+            _context.Receita.Remove(receita);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool ReceitaExists(int id)
         {
-            return _context.User.Any(e => e.id == id);
+            return _context.Receita.Any(e => e.id == id);
+        }
+
+        public ReceitaViewModel GetReceitaById(int id)
+        {
+            ReceitaViewModel rvm = new ReceitaViewModel();
+            var receita = _context.Receita.Find(id);
+            rvm.classificacao = receita.classificacao;
+            rvm.descricao = receita.descricao;
+            rvm.dificuldade = receita.dificuldade;
+            rvm.dose = receita.dose;
+            rvm.id = receita.id;
+            rvm.imagem = receita.imagem;
+            rvm.tempo = receita.tempo;
+            rvm.valor = receita.valor;
+
+            var ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == id);
+
+            foreach(var i in ingredientes)
+            {
+                Ingrediente ing = _context.Ingrediente.Where(ig => ig.id == i.ingredienteid).Single();
+                rvm.Ingredientes.Add(ing.id, ing);
+            }
+            return rvm; 
+        }
+
+        public IActionResult GetReceita(int id)
+        {
+            ReceitaViewModel receita = GetReceitaById(id);
+            return View("getReceita", receita);
         }
     }
 }

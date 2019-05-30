@@ -75,7 +75,7 @@ namespace Eloise.Models
         public virtual Receita receita { set; get; }
 
     }
-
+    /*
     public class Ingrediente
     {
         [Key]
@@ -85,13 +85,13 @@ namespace Eloise.Models
         [StringLength(50)]
         public string descricao { set; get; }
 
-        [Required]
-        [StringLength(50)]
-        public string quantidade { set; get; }
+        //[Required]
+        //[StringLength(50)]
+        //public string quantidade { set; get; }
 
         public virtual ICollection<IngredienteReceita> receitas { set; get; }
-        public virtual Receita receita { set; get; }
-    }
+        
+    }*/
 
     public class IngredienteReceita
     {
@@ -101,101 +101,14 @@ namespace Eloise.Models
         [Key]
         public int receitaid { set; get; }
 
-        public virtual Receita receita { set; get; }
+        public Receita Receita { set; get; }
 
-        public virtual Ingrediente ingrediente { set; get; }
+        public Ingrediente Ingrediente { set; get; }
 
 
     }
 
-    public class ReceitaContext : DbContext
-    {
-        public ReceitaContext(DbContextOptions<ReceitaContext> options)
-            : base(options)
-        {
-        }
-
-
-
-        public DbSet<Receita> Receita { get; set; }
-        public DbSet<Passo> passo { get; set; }
-
-        public DbSet<IngredienteReceita> ingredientes { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Passo>().HasKey(t => new { t.receitaid, t.ingredienteid });
-            modelBuilder.Entity<IngredienteReceita>().HasKey(t => new { t.ingredienteid, t.receitaid });
-
-            modelBuilder.Entity<IngredienteReceita>()
-            .HasOne(t => t.ingrediente)
-            .WithMany(t => t.receitas)
-            .HasForeignKey(t => t.ingredienteid);
-
-
-            modelBuilder.Entity<IngredienteReceita>()
-                        .HasOne(t => t.receita)
-                        .WithMany(t => t.ingredientes)
-                        .HasForeignKey(t => t.receitaid);
-        }
-        
-    }
     
-    public class PassoContext : DbContext
-    {
-        public PassoContext(DbContextOptions<PassoContext> options)
-            : base(options)
-        {
-        }
-
-
-        public DbSet<Receita> Receita { get; set; }
-
-
-        public DbSet<Passo> Passo { get; set; }
-    }
-
-    public class IngredienteContext : DbContext
-    {
-        public IngredienteContext(DbContextOptions<IngredienteContext> options)
-            : base(options)
-        {
-        }
-
-
-        public DbSet<Receita> Receita { get; set; }
-
-
-        public DbSet<Passo> Passo { get; set; }
-    }
-    
-    public class IngredienteReceitaContext : DbContext
-    {
-        public IngredienteReceitaContext(DbContextOptions<IngredienteReceitaContext> options)
-            : base(options)
-        {
-        }
-        public DbSet<Receita> Receita { get; set; }
-
-
-        public DbSet<Passo> Passo { get; set; }
-        public DbSet<IngredienteReceita> Ingredientereceita { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<IngredienteReceita>().HasKey(t => new { t.ingredienteid, t.receitaid });
-
-            modelBuilder.Entity<IngredienteReceita>()
-                        .HasOne(t => t.ingrediente)
-                        .WithMany(t => t.receitas)
-                        .HasForeignKey(t => t.ingredienteid);
-
-
-            modelBuilder.Entity<IngredienteReceita>()
-                        .HasOne(t => t.receita)
-                        .WithMany(t => t.ingredientes)
-                        .HasForeignKey(t => t.receitaid);
-
-        }
-    }
 }
+    
+

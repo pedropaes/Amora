@@ -1,4 +1,4 @@
-﻿@model Eloise.Models.Receita
+﻿@model ReceitaViewModel
 
 
 <table class="table table-borderless">
@@ -27,7 +27,6 @@
                 <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => Model.dose) pessoas</p>
                 <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => Model.classificacao) de 5</p>
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => Model.dose)</p>
-                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => Model.passos.Count)</p>
                 
             </td>
             <td class="table-info"></td>
@@ -47,11 +46,11 @@
     </thead>
     <tbody>
 
-        @foreach (var item in Model.passos)
+        @foreach (var item in Model.Ingredientes.Values)
         {
             <tr>
                 <td class="table-info">
-                    <p align="left"><b>@Html.DisplayFor(modelItem => item.numero). </b>@Html.DisplayFor(modelItem => item.tecnica) </p>
+                    <p align="left"><b>@Html.DisplayFor(modelItem => item.descricao). </b></p>
                 </td>
             </tr>
         }

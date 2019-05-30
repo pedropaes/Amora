@@ -1,0 +1,45 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Eloise.Models
+{
+    public class EloiseContext:DbContext
+    {
+        public EloiseContext(DbContextOptions<EloiseContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Receita> Receita { get; set; }
+        public DbSet<Passo> Passo { get; set; }
+
+        public DbSet<Ingrediente> Ingrediente { get; set; }
+        public DbSet<IngredienteReceita> IngredienteReceita { get; set; }
+
+        public DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IngredienteReceita>()
+                        .HasKey(t => new { t.ingredienteid, t.receitaid });
+
+            modelBuilder.Entity<IngredienteReceita>()
+                        .HasOne(t => t.Receita)
+                        .WithMany(t => t.ingredientes)
+                        .HasForeignKey(t => t.receitaid);
+            
+            modelBuilder.Entity<IngredienteReceita>()
+                        .HasOne(t => t.Ingrediente)
+                        .WithMany(t => t.receitas)
+                        .HasForeignKey(t => t.ingredienteid);
+            
+            modelBuilder.Entity<Passo>()
+                        .HasKey(t => new { t.receitaid, t.ingredienteid });
+
+                        
+        }
+    }
+}

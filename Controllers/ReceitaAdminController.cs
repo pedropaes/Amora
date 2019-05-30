@@ -11,9 +11,9 @@ namespace Eloise.Controllers
 {
     public class ReceitaAdminController : Controller
     {
-        private readonly ReceitaContext _context;
+        private readonly EloiseContext _context;
 
-        public ReceitaAdminController(ReceitaContext context)
+        public ReceitaAdminController(EloiseContext context)
         {
             _context = context;
         }

@@ -15,24 +15,24 @@ namespace Eloise.Controllers
     public class ReceitaViewController : Controller
     {
 
-        private ReceitaHandling receitaHandling;
-        public ReceitaViewController(ReceitaContext context)
+        private readonly EloiseContext _context;
+        public ReceitaViewController(EloiseContext context)
         {
-            //_context = context;
-            receitaHandling = new ReceitaHandling(context);
+            _context = context;
+            //receitaHandling = new ReceitaHandling(context);
         }
 
-        public IActionResult getReceitas()
-        {
-            Receita[] receitas = receitaHandling.getReceitas();
-            return View(receitas);
-        }
+        //public IActionResult getReceitas()
+        //{
+        //    Receita[] receitas = receitaHandling.getReceitas();
+        //    return View(receitas);
+        //}
 
-        public IActionResult getReceita()
-        {
-            Receita receitas = receitaHandling.getReceita(1);
-            return View(receitas);
-        }
+        //public IActionResult getReceita()
+        //{
+        //    Receita receitas = receitaHandling.getReceita(1);
+        //    return View(receitas);
+        //}
 
         [HttpGet]
         public IActionResult RegisterReceita()

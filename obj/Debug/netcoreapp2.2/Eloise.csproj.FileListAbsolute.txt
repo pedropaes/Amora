@@ -43,3 +43,9 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAd
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Edit.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaAdmin\Index.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\ReceitaView\getReceita.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Create.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Delete.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Details.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Edit.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Index.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\TesteView.g.cshtml.cs

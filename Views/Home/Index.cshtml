@@ -14,6 +14,9 @@
             <a asp-controller="ReceitaView" asp-action="getReceitas">Ver Receitas</a>
         </p>
         <p>
-            <a asp-controller="ReceitaView" asp-action="getReceita">Ver Receita 1</a>
+            <a asp-controller="Receitas" asp-action="getReceita">Ver Receita 1</a>
         </p>
+        <div class="form-group">
+            <input type="button" value="Receita" class="btn btn-default btn-primary" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = 1})'" />
+        </div>
     </div>

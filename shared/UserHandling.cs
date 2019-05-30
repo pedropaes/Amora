@@ -9,8 +9,8 @@ namespace Eloise.shared
 {
     public class UserHandling
     {
-        private readonly UserContext _context;
-        public UserHandling(UserContext context)
+        private readonly EloiseContext _context;
+        public UserHandling(EloiseContext context)
         {
             _context = context;
         }
