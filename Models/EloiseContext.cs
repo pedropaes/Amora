@@ -33,7 +33,7 @@ namespace Eloise.Models
             
             modelBuilder.Entity<IngredienteReceita>()
                         .HasOne(t => t.Ingrediente)
-                        .WithMany(t => t.receitas)
+                        .WithMany(t => t.Receitas)
                         .HasForeignKey(t => t.ingredienteid);
             
             modelBuilder.Entity<Passo>()

@@ -15,10 +15,7 @@ namespace Eloise.Models
         [StringLength(50)]
         public string descricao { set; get; }
 
-        //[Required]
-        //[StringLength(50)]
-        //public string quantidade { set; get; }
 
-        public virtual ICollection<IngredienteReceita> receitas { set; get; }
+        public virtual ICollection<IngredienteReceita> Receitas { set; get; }
     }
 }

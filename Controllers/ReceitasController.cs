@@ -162,12 +162,13 @@ namespace Eloise.Controllers
             rvm.tempo = receita.tempo;
             rvm.valor = receita.valor;
 
-            var ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == id);
+            var ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == id).Select(ri => ri.Ingrediente);
 
-            foreach(var i in ingredientes)
+            foreach(Ingrediente i in ingredientes)
             {
-                Ingrediente ing = _context.Ingrediente.Where(ig => ig.id == i.ingredienteid).Single();
-                rvm.Ingredientes.Add(ing.id, ing);
+                //Ingrediente ing = _context.Ingrediente.Where(ig => ig.id == i.id);
+                rvm.Ingredientes = new Dictionary<int, Ingrediente>();
+                rvm.Ingredientes.Add(i.id, i);
             }
             return rvm; 
         }
