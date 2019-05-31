@@ -31,8 +31,8 @@ namespace Eloise.Models
 
         public string imagem { set; get; }
 
-        public Dictionary<Passo, Ingrediente> PassoIngredientes { get; set; }
+        public Dictionary<int, Passo> Passos { get; set; }
         
-        public Dictionary<int,Ingrediente> Ingredientes { get; set; }
+        public List<Ingrediente> Ingredientes { get; set; }
     }
 }

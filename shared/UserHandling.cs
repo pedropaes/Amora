@@ -17,14 +17,14 @@ namespace Eloise.shared
 
         public bool registerUser(User user)
         {
-            user.password = MyHelpers.HashPassword(user.password);
+            user.password = Encript.HashPassword(user.password);
             _context.User.Add(user);
             _context.SaveChanges();
             return true;
         }
         public bool validateUser(User user)
         {
-            user.password = MyHelpers.HashPassword(user.password);
+            user.password = Encript.HashPassword(user.password);
             var returnedUser = _context.User.Where(b => b.email == user.email && b.password == user.password).FirstOrDefault();
 
             if (returnedUser == null)

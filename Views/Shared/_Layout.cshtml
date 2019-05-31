@@ -5,10 +5,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Eloise</title>
+    <title>@ViewData["Title"] Eloise</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/css/star-rating.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,9 +17,11 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <script src="~/js/star-rating.js"></script>
 </head>
 <body>
     <header>
@@ -44,7 +47,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Gerir Utilizadores</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ReceitaAdmin" asp-action="Index">Gerir Receitas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Receitas" asp-action="Index">Gerir Receitas</a>
                                 </li>
                             }
                             else
@@ -54,10 +57,12 @@
                                 </li>
                                 <li>
                                     <div class="ignore-css">
-                                        <form class="form-inline">
-                                            <input class="form-control mr-sm-2 ignore-css" type="search" placeholder="Procurar Receita" aria-label="Procurar">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
-                                        </form>
+                                        @using (Html.BeginForm("GetReceitaByString", "Receitas", new { @class = "form-inline" }))
+                                        {
+                                            @Html.TextBox("keyword")
+                                            <input type="submit"class="btn btn-outline-success my-2 my-sm-0" value="Procurar" />
+                                        }
+
                                     </div>
                                 </li>
                             }

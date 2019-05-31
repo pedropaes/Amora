@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Eloise.Models;
+using Eloise.shared;
 
 namespace Eloise.Controllers
 {
     public class ReceitasController : Controller
     {
         private readonly EloiseContext _context;
+        private ReceitaHandling handling;
 
         public ReceitasController(EloiseContext context)
         {
             _context = context;
+            handling = new ReceitaHandling(_context);
         }
 
         // GET: Receitas
@@ -151,32 +154,69 @@ namespace Eloise.Controllers
 
         public ReceitaViewModel GetReceitaById(int id)
         {
+            
+            Receita receita = _context.Receita.Find(id);
+            ReceitaHandling handling = new ReceitaHandling(_context);
+            ReceitaViewModel rvm = handling.ReceitaToReceitaCompleta(receita);
+            return rvm;
+        }
+
+        public List<ReceitaViewModel> GetReceitaByIngrediente(string ingrediente)
+        {
+            var ing_id = 0;
+            List<ReceitaViewModel> rvms = new List<ReceitaViewModel>();
+            
+            Receita r = new Receita();
             ReceitaViewModel rvm = new ReceitaViewModel();
-            var receita = _context.Receita.Find(id);
-            rvm.classificacao = receita.classificacao;
-            rvm.descricao = receita.descricao;
-            rvm.dificuldade = receita.dificuldade;
-            rvm.dose = receita.dose;
-            rvm.id = receita.id;
-            rvm.imagem = receita.imagem;
-            rvm.tempo = receita.tempo;
-            rvm.valor = receita.valor;
-
-            var ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == id).Select(ri => ri.Ingrediente);
-
-            foreach(Ingrediente i in ingredientes)
+            //Procura id de Ingrediente
+            foreach (Ingrediente i in _context.Ingrediente)
             {
-                //Ingrediente ing = _context.Ingrediente.Where(ig => ig.id == i.id);
-                rvm.Ingredientes = new Dictionary<int, Ingrediente>();
-                rvm.Ingredientes.Add(i.id, i);
+                var val = i.descricao;
+                if (val.Equals(ingrediente, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    ing_id = i.id;
+                    break;
+                }
             }
-            return rvm; 
+            //Procura receitas que contêm o ingrediente
+            foreach (IngredienteReceita ir in _context.IngredienteReceita)
+            {
+                if (ir.ingredienteid == ing_id)
+                {
+                    r = _context.Receita.Find(ir.receitaid);
+
+                    rvm = handling.ReceitaToReceitaCompleta(r);
+                    rvms.Add(rvm);
+                }
+            }
+            return rvms;
+        }
+
+        public IActionResult GetReceitas()
+        {
+            var all = _context.Receita.ToArray();
+            List<Receita> receitas = all.ToList<Receita>();
+            List<ReceitaViewModel> rvms;
+            ReceitaViewModel rvm = new ReceitaViewModel();
+
+            rvms = handling.ReceitastoReceitasCompletas(receitas);
+
+            
+            return View("Lista", rvms);
+        }
+
+        public IActionResult GetReceitaByString(string keyword)
+        {
+            List<ReceitaViewModel> rvms = GetReceitaByIngrediente(keyword);
+
+
+            return View("Lista", rvms);
         }
 
         public IActionResult GetReceita(int id)
         {
             ReceitaViewModel receita = GetReceitaById(id);
-            return View("getReceita", receita);
+            return View("GetReceita", receita);
         }
     }
 }

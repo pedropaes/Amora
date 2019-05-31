@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eloise.shared
 {
-    public class MyHelpers
+    public class Encript
     {
 
         public static string GetMd5Hash(MD5 md5Hash, string input)

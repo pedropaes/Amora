@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Eloise.Models.Receita>
+﻿@model List<Eloise.Models.ReceitaViewModel>
 
 
 @foreach (var item in Model) {
@@ -19,7 +19,7 @@
     <tbody>
         <tr>
             <td  class="table-info">
-                <img src="~/images/@Html.DisplayFor(modelItem => item.imagem)" alt="@Html.DisplayFor(modelItem => item.descricao)">
+                <img src="~/images/@Html.DisplayFor(modelItem => item.imagem)" alt="@Html.DisplayFor(modelItem => item.descricao)" width="400" height="400">
             </td>
             <td class="table-info">
                 <p align="left"><b>Regime:</b> @Html.DisplayFor(modelItem => item.regime)</p>
@@ -28,9 +28,15 @@
                 <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => item.dose) pessoas</p>
                 <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => item.classificacao) de 5</p>
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => item.dose)</p>
-                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => item.passos )</p>
+                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => item.Passos.Count )</p>
             </td>
-            <td  class="table-info">
+            <td class="table-info">
+                <p align="center"><b>Ingredientes:</b></p>
+                @foreach (var ing in item.Ingredientes)
+                {
+                    <p align="center">@Html.DisplayFor(modelItem => ing.descricao)</p>
+                }
+
             </td>
 
         </tr>

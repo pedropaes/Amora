@@ -1,6 +1,6 @@
 ﻿@model ReceitaViewModel
 
-
+<link href="Bootstrap/css/star-rating.css" rel="stylesheet" />
 <table class="table table-borderless">
     <thead>
         <tr>
@@ -26,8 +26,31 @@
                 <p align="left"><b>Tempo de confeção:</b> @Html.DisplayFor(modelItem => Model.tempo)</p>
                 <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => Model.dose) pessoas</p>
                 <p align="left"><b>Classificação:</b> @Html.DisplayFor(modelItem => Model.classificacao) de 5</p>
+                <script>
+
+       $(document).ready(function () {
+           $("#input-21b").on("rating.change", function (event, value, caption) {
+               alert("You rated: " + value + " = " + $(caption).text());
+           });
+       });
+                </script>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <input id="input-21a" value="0" type="number" class="rating" data-symbol="*" min=0 max=5 step=0.5 data-size="xl">
+                        <hr>
+                        <input id="input-21b" type="number" class="rating" min=0 max=5 step=0.5 data-glyphicon="false" data-star-captions="{}" data-default-caption="{rating} Stars" data-size="lg">
+                        <hr>
+                        <input id="input-21c" value="0" type="number" class="rating" min=0 max=8 step=0.5 data-size="xl" data-stars="8">
+                        <hr>
+                        <input id="input-21d" value="2" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm">
+                        <hr>
+                        <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs">
+                        <hr>
+                    </div>
+                </div>
                 <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => Model.dose)</p>
-                
+
             </td>
             <td class="table-info"></td>
 
@@ -46,7 +69,7 @@
     </thead>
     <tbody>
 
-        @foreach (var item in Model.Ingredientes.Values)
+        @foreach (var item in Model.Ingredientes)
         {
             <tr>
                 <td class="table-info">

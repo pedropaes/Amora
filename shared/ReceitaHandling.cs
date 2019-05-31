@@ -15,39 +15,44 @@ namespace Eloise.shared
             _context = context;
         }
 
-        /*
-        public Receita getRecipe(string ingrediente)
+        public ReceitaViewModel ReceitaToReceitaCompleta(Receita receita)
         {
-           Receita r = _context.Receita.Where(b => b.descricao.Equals(ingrediente));
-           return r;
-        }
-        */
-        public Receita[] getReceitas()
-        {
-            return _context.Receita.ToArray();
-        }
-        public Receita getReceita(int id)
-        {
-            var recipe = _context.Receita.Find(id);
+            ReceitaViewModel rvm = new ReceitaViewModel();
+            rvm.classificacao = receita.classificacao;
+            rvm.descricao = receita.descricao;
+            rvm.dificuldade = receita.dificuldade;
+            rvm.dose = receita.dose;
+            rvm.id = receita.id;
+            rvm.imagem = receita.imagem;
+            rvm.tempo = receita.tempo;
+            rvm.regime = receita.regime;
+            rvm.tipo = receita.tipo;
+            rvm.valor = receita.valor;
 
-            var passos = _context.Passo.Where(s => s.receitaid == recipe.id);
+            rvm.Ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == receita.id).Select(ri => ri.Ingrediente).ToList();
 
-            //IEnumerable <Ingrediente> ingredientes = _context.ingredientes.Where(ri => ri.ingrediente.receita.id == recipe.id).Select(i => i.ingrediente);
-            //recipe.ingredientex = _context.Ingredientes.Where(ri => ri.receita.id == recipe.id).Select(i => i.ingrediente);
-            //Debug.Print(ingredientes.Count().ToString());
-            foreach (Passo t in passos)
+            var passos = _context.Passo.Where(s => s.receitaid == receita.id);
+
+
+            foreach (Passo p in passos)
             {
-                recipe.passos.Add(t);
+                rvm.Passos = new Dictionary<int, Passo>();
+                rvm.Passos.Add(p.numero, p);
             }
-            
-        /*
-            foreach (Ingrediente i in ingredientes)
+            return rvm;
+
+        }
+        
+        public List<ReceitaViewModel> ReceitastoReceitasCompletas(List<Receita> receitas)
+        {
+            List<ReceitaViewModel> rvms = new List<ReceitaViewModel>();
+            foreach(Receita r in receitas)
             {
-                recipe.ingredientex.Add(i);
+               rvms.Add(ReceitaToReceitaCompleta(r));
             }
-            */
-            return recipe;
+
+            return rvms;
+        }
 
         }
     }
-}
