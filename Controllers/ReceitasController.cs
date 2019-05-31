@@ -181,9 +181,9 @@ namespace Eloise.Controllers
             //Procura receitas que contêm o ingrediente
             foreach (IngredienteReceita ir in _context.IngredienteReceita)
             {
-                if (ir.ingredienteid == ing_id)
+                if (ir.id_ingrediente == ing_id)
                 {
-                    r = _context.Receita.Find(ir.receitaid);
+                    r = _context.Receita.Find(ir.id_receita);
 
                     rvm = handling.ReceitaToReceitaCompleta(r);
                     rvms.Add(rvm);

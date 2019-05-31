@@ -10,10 +10,10 @@ namespace Eloise.Models
     {
         
         [Key]
-        public int ingredienteid { set; get; }
+        public int id_ingrediente { set; get; }
 
         [Key]
-        public int receitaid { set; get; }
+        public int id_receita { set; get; }
 
         public Receita Receita { set; get; }
 

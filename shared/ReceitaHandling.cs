@@ -29,15 +29,15 @@ namespace Eloise.shared
             rvm.tipo = receita.tipo;
             rvm.valor = receita.valor;
 
-            rvm.Ingredientes = _context.IngredienteReceita.Where(i => i.receitaid == receita.id).Select(ri => ri.Ingrediente).ToList();
+            rvm.Ingredientes = _context.IngredienteReceita.Where(i => i.id_receita == receita.id).Select(ri => ri.Ingrediente).ToList();
 
             var passos = _context.Passo.Where(s => s.receitaid == receita.id);
-
+            rvm.Passos = new Dictionary<int, Passo>();
 
             foreach (Passo p in passos)
             {
-                rvm.Passos = new Dictionary<int, Passo>();
-                rvm.Passos.Add(p.numero, p);
+                
+                rvm.Passos.Add(p.passo, p);
             }
             return rvm;
 

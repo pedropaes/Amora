@@ -24,20 +24,20 @@ namespace Eloise.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IngredienteReceita>()
-                        .HasKey(t => new { t.ingredienteid, t.receitaid });
+                        .HasKey(t => new { t.id_ingrediente, t.id_receita });
 
             modelBuilder.Entity<IngredienteReceita>()
                         .HasOne(t => t.Receita)
                         .WithMany(t => t.ingredientes)
-                        .HasForeignKey(t => t.receitaid);
+                        .HasForeignKey(t => t.id_receita);
             
             modelBuilder.Entity<IngredienteReceita>()
                         .HasOne(t => t.Ingrediente)
                         .WithMany(t => t.Receitas)
-                        .HasForeignKey(t => t.ingredienteid);
+                        .HasForeignKey(t => t.id_ingrediente);
             
             modelBuilder.Entity<Passo>()
-                        .HasKey(t => new { t.receitaid, t.ingredienteid });
+                        .HasKey(t => new { t.receitaid, t.passo });
 
                         
         }

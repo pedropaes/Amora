@@ -118,3 +118,13 @@ BULK INSERT dbo.ValorNutricional FROM 'C:\Users\Pedro\Desktop\Script\ValorNutric
 	);
 
 SELECT * FROM ValorNutricional;
+
+--Povoamento User
+DELETE FROM User;
+BULK INSERT dbo.User FROM 'C:\Users\Pedro\Desktop\Script\User.csv'
+	WITH (
+		ROWTERMINATOR = '\n',
+		FIELDTERMINATOR = ';',
+		CODEPAGE = 'ACP',
+		KEEPIDENTITY
+	);
