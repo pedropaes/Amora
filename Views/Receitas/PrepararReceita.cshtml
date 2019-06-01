@@ -1,0 +1,120 @@
+﻿@model ReceitaViewModel
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+
+<button id='btnGiveCommand'>Give Command!</button>
+<br><br>
+<span id='message'></span>
+<br><br>
+
+
+<script>
+    var message = document.querySelector('#message');
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var grammar = '#JSGF V1.0;'
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    recognition.lang = 'pt-PT';
+    recognition.interimResults = false;
+    recognition.onresult = function (event) {
+        var last = event.results.length - 1;
+        var command = event.results[last][0].transcript;
+        message.textContent = 'Voice Input: ' + command + '.';
+
+        switch(command.toLowerCase()) {
+        case 'próximo':
+            document.getElementById('next').click();
+            break;
+        case 'anterior':
+            document.getElementById('previous').click();
+            break;
+       
+        break;
+            default:
+            
+        // code block
+        }
+        /*
+        if (command.toLowerCase() === 'select steve') {
+            document.querySelector('#chkSteve').checked = true;
+        }
+        else if (command.toLowerCase() === 'select tony') {
+            document.querySelector('#chkTony').checked = true;
+        }
+          else if (command.toLowerCase() === 'voltar') {
+            document.getElementById('previous').click();
+        }
+        else if (command.toLowerCase() === 'próximo') {
+            document.getElementById('next').click();
+        }*/
+    };
+    recognition.onspeechend = function () {
+        recognition.stop();
+    };
+    recognition.onerror = function (event) {
+        message.textContent = 'Error occurred in recognition: ' + event.error;
+    }
+    document.querySelector('#btnGiveCommand').addEventListener('click', function () {
+        recognition.start();
+    });
+</script>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                @{
+                    var result = 100;
+
+                }
+                <ol class="carousel-indicators">
+                    @foreach (var item in Model.Passos.Values)
+                    {
+
+                        <li data-target="#carouselExampleIndicators" data-slide-to="@Html.DisplayFor(modelItem => item.passo)" class="active"></li>
+
+                    }
+
+                </ol>
+                <div class="carousel-inner">
+                    <img class="d-block w-100" src="~/images/background.png" alt="First slide" width="500" height="500">
+                    <div class="carousel-item active">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Iniciar preparar receita</h1>
+                            <h2><p>Teste 123 </p></h2>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                    @foreach (var item in Model.Passos.Values)
+                    {
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h1>Passo  @Html.DisplayFor(modelItem => item.passo)</h1>
+                                <h2><p>@Html.DisplayFor(modelItem => item.tecnica)</p></h2>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a id='previous' class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a id='next' class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <img class="d-block w-100" src="~/images/@Html.DisplayFor(modelItem => Model.imagem)" alt="Second slide" width="500" height="500">
+        </div>
+    </div>
+    
+</div>

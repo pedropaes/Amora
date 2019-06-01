@@ -249,5 +249,11 @@ namespace Eloise.Controllers
             ReceitaViewModel receita = GetReceitaById(id);
             return View("GetReceita", receita);
         }
+
+        public IActionResult PrepararReceita(int id)
+        {
+            ReceitaViewModel receita = GetReceitaById(id);
+            return View("PrepararReceita", receita);
+        }
     }
 }
