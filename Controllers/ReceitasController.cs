@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Eloise.Models;
 using Eloise.shared;
+using System.Security.Claims;
 
 namespace Eloise.Controllers
 {
@@ -14,11 +15,13 @@ namespace Eloise.Controllers
     {
         private readonly EloiseContext _context;
         private ReceitaHandling handling;
+        private UserHandling userhandling;
 
         public ReceitasController(EloiseContext context)
         {
             _context = context;
             handling = new ReceitaHandling(_context);
+            userhandling = new UserHandling(_context);
         }
 
         // GET: Receitas
@@ -202,6 +205,24 @@ namespace Eloise.Controllers
             rvms = handling.ReceitastoReceitasCompletas(receitas);
 
             
+            return View("Lista", rvms);
+        }
+
+        public IActionResult Favoritos()
+        {
+            var userId = User.FindFirst(ClaimTypes.Sid).Value;
+            int id;
+            if (string.IsNullOrEmpty(userId)) id = 1;
+
+
+            int.TryParse(userId, out id);
+            User u =  _context.User.Find(id);
+            userhandling.getFavoritos(u);
+            List<ReceitaViewModel> rvms;
+
+            rvms = handling.ReceitastoReceitasCompletas(u.Receitas);
+
+
             return View("Lista", rvms);
         }
 

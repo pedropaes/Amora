@@ -72,11 +72,12 @@ namespace Eloise.Controllers
                 
                 if (LoginStatus)
                 {
-                   
+
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, u.nome),
-                        new Claim(ClaimTypes.Role, u.tipo)
+                        new Claim(ClaimTypes.Role, u.tipo),
+                        new Claim(ClaimTypes.Sid, u.id.ToString(),  ClaimValueTypes.Integer),
                     };
                     ClaimsIdentity userIdentity = new ClaimsIdentity("login");
                     userIdentity.AddClaims(claims);

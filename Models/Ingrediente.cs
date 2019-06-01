@@ -17,5 +17,7 @@ namespace Eloise.Models
 
 
         public virtual ICollection<IngredienteReceita> Receitas { set; get; }
+
+        public virtual ICollection<IngredienteAlergenio> Alergenios { set; get; }
     }
 }

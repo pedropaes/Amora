@@ -38,6 +38,14 @@ namespace Eloise.shared
            User u = _context.User.Where(b => b.email == email).FirstOrDefault();
            return u;
         }
+
+        public void getFavoritos(User u)
+        {
+            u.Receitas = new List<Receita>();
+            u.Receitas = _context.Favoritos.Where(b => b.id_Utilizador == u.id).Select(ri => ri.Receita).ToList();
+            _context.SaveChanges();
+        }
+
         public User[] getUsers()
         {
             return _context.User.ToArray();

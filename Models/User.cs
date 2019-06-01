@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +30,12 @@ namespace Eloise.Models
         [StringLength(50)]
         public string tipo { set; get; }
 
-        //public virtual ICollection<Receita> favoritos { get; set; }
+        public virtual ICollection<Favoritos> Favoritos { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public virtual List<Receita> Receitas { get; set; }
+
 
     }
 

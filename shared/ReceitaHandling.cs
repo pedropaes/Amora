@@ -15,6 +15,18 @@ namespace Eloise.shared
             _context = context;
         }
 
+        public void getAlergenios(ReceitaViewModel rvm)
+        {
+            List<Alergenio> Alergenios = new List<Alergenio>();
+
+            
+            foreach (Ingrediente i in rvm.Ingredientes)
+            {
+                var aler = _context.IngredienteAlergenio.Where(b => b.id_Ingrediente == i.id).Select(ai => ai.Alergenio).FirstOrDefault();
+                if (aler != null) Alergenios.Add(aler);
+            }
+            rvm.Alergenios = Alergenios;
+        }
         public ReceitaViewModel ReceitaToReceitaCompleta(Receita receita)
         {
             ReceitaViewModel rvm = new ReceitaViewModel();
@@ -39,6 +51,8 @@ namespace Eloise.shared
                 
                 rvm.Passos.Add(p.passo, p);
             }
+
+            getAlergenios(rvm);
             return rvm;
 
         }

@@ -51,7 +51,9 @@ namespace Eloise.Models
         public virtual ICollection<Passo> passos { get; set; }
 
         public virtual ICollection<IngredienteReceita> ingredientes { get; set; }
-       
+
+        public virtual ICollection<Favoritos> Users { get; set; }
+
 
 
     }

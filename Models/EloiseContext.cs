@@ -16,6 +16,11 @@ namespace Eloise.Models
         public DbSet<Receita> Receita { get; set; }
         public DbSet<Passo> Passo { get; set; }
 
+        public DbSet<Receita> Alergenio { get; set; }
+
+        public DbSet<IngredienteAlergenio> IngredienteAlergenio { get; set; }
+        public DbSet<Favoritos> Favoritos { get; set; }
+
         public DbSet<Ingrediente> Ingrediente { get; set; }
         public DbSet<IngredienteReceita> IngredienteReceita { get; set; }
 
@@ -39,7 +44,32 @@ namespace Eloise.Models
             modelBuilder.Entity<Passo>()
                         .HasKey(t => new { t.receitaid, t.passo });
 
-                        
+            modelBuilder.Entity<Favoritos>()
+                 .HasKey(t => new { t.id_Utilizador, t.id_Receita });
+
+            modelBuilder.Entity<Favoritos>()
+            .HasOne(t => t.User)
+            .WithMany(t => t.Favoritos)
+            .HasForeignKey(t => t.id_Utilizador);
+
+            modelBuilder.Entity<Favoritos>()
+                        .HasOne(t => t.Receita)
+                        .WithMany(t => t.Users)
+                        .HasForeignKey(t => t.id_Receita);
+
+            modelBuilder.Entity<IngredienteAlergenio>()
+                 .HasKey(t => new { t.id_Alergenio, t.id_Ingrediente });
+
+            modelBuilder.Entity<IngredienteAlergenio>()
+            .HasOne(t => t.Ingrediente)
+            .WithMany(t => t.Alergenios)
+            .HasForeignKey(t => t.id_Ingrediente);
+
+            modelBuilder.Entity<IngredienteAlergenio>()
+                        .HasOne(t => t.Alergenio)
+                        .WithMany(t => t.Ingredientes)
+                        .HasForeignKey(t => t.id_Alergenio);
+
         }
     }
 }
