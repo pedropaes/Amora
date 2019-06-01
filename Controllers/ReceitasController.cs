@@ -192,6 +192,16 @@ namespace Eloise.Controllers
                     rvms.Add(rvm);
                 }
             }
+
+            foreach (Receita rec in _context.Receita)
+            {
+                bool isContained = rec.descricao.IndexOf(ingrediente, StringComparison.OrdinalIgnoreCase) >= 0;
+                if (isContained)
+                {
+                    rvm = handling.ReceitaToReceitaCompleta(rec);
+                    rvms.Add(rvm);
+                }
+            }
             return rvms;
         }
 

@@ -1,64 +1,74 @@
 ﻿@model List<Eloise.Models.ReceitaViewModel>
 
-
-@foreach (var item in Model)
+@if (Model.Count == 0)
 {
-
-    <p><b>@Html.DisplayFor(modelItem => item.descricao)</b></p>
-    <div class="container" style="background-color:#E3F2FD">
-
-        <div class="row px-2">
-            <div class="col-sm">
-                <img src="~/images/@Html.DisplayFor(modelItem => item.imagem)" alt="@Html.DisplayFor(modelItem => item.descricao)" width="300" height="300">
-            </div>
-            <div class="col-sm px-2">
-                <p align="left"><b>Regime:</b> @Html.DisplayFor(modelItem => item.regime)</p>
-                <p align="left"><b>Tipo:</b> @Html.DisplayFor(modelItem => item.tipo)</p>
-                <p align="left"><b>Tempo de confeção:</b> @Html.DisplayFor(modelItem => item.tempo.TotalMinutes) min. <i class="fas fa-clock"></i>
-                <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => item.dose) <i class="fas fa-male"></i></p>
-                <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => item.dificuldade)</p>
-                <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => item.Passos.Count)</p>
-                @{
-                    var result = (item.classificacao / 5) * 100;
-
-                }
-
-                <b>Classificação:</b> <div class="media star-ratings-sprite"><span style="width:@result%" class="star-ratings-sprite-rating"></span></div>
-
-            </div>
-            <div class="col-sm">
-                <p align="center"><b>Ingredientes:</b></p>
-                @foreach (var ing in item.Ingredientes)
-                {
-                    <p align="center">@Html.DisplayFor(modelItem => ing.descricao)</p>
-                }
-
-            </div>
-
-
-        </div>
+    <div class="alert alert-danger" role="alert">
+        Não foram encontrados resultados <i class="fas fa-frown-open"></i>
     </div>
-  
-    <div class="container"  style="background-color:#E3F2FD">
-        <div class="row">
-            <div class="col-6">
-                <ul class="share-buttons">
-                    <li><a href="https://www.facebook.com/sharer/sharer.php?u=&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="~/images/social_flat_rounded_rects_svg/Facebook.svg" /></a></li>
-                    <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="~/images/social_flat_rounded_rects_svg/Twitter.svg" /></a></li>
-                    <li><a href="http://www.tumblr.com/share?v=3&u=&quote=&s=" target="_blank" title="Post to Tumblr" onclick="window.open('http://www.tumblr.com/share?v=3&u=' + encodeURIComponent(document.URL) + '&quote=' +  encodeURIComponent(document.title)); return false;"><img alt="Post to Tumblr" src="~/images/social_flat_rounded_rects_svg/Tumblr.svg" /></a></li>
-                    <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it" onclick="window.open('http://pinterest.com/pin/create/button/?url=' + encodeURIComponent(document.URL) + '&description=' +  encodeURIComponent(document.title)); return false;"><img alt="Pin it" src="~/images/social_flat_rounded_rects_svg/Pinterest.svg" /></a></li>
-                    <li><a href="http://www.reddit.com/submit?url=&title=" target="_blank" title="Submit to Reddit" onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img alt="Submit to Reddit" src="~/images/social_flat_rounded_rects_svg/Reddit.svg" /></a></li>
-                    <li><a href="mailto:?subject=&body=:%20" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="~/images/social_flat_rounded_rects_svg/Email.svg" /></a></li>
-                </ul>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger" />
-                <input type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = item.id})'" />
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning" />
-                <input type="button" value="Ver Receita" class="btn btn-warning" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = item.id})'" />
+}
+else
+{
+    @foreach (var item in Model)
+    {
+
+        <p><b>@Html.DisplayFor(modelItem => item.descricao)</b></p>
+        <div class="container" style="background-color:#E3F2FD">
+
+            <div class="row px-2">
+                <div class="col-sm">
+                    <p></p>
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.imagem)" alt="@Html.DisplayFor(modelItem => item.descricao)" width="300" height="300">
+                </div>
+                <div class="col-sm px-2">
+                    <p></p>
+                    <p align="left"><b>Regime:</b> @Html.DisplayFor(modelItem => item.regime)</p>
+                    <p align="left"><b>Tipo:</b> @Html.DisplayFor(modelItem => item.tipo)</p>
+                    <p align="left"><b>Tempo de confeção:</b> @Html.DisplayFor(modelItem => item.tempo.TotalMinutes) min. <i class="fas fa-clock"></i>
+                    <p align="left"><b>Dose:</b> @Html.DisplayFor(modelItem => item.dose) <i class="fas fa-male"></i></p>
+                    <p align="left"><b>Dificuldade:</b> @Html.DisplayFor(modelItem => item.dificuldade)</p>
+                    <p align="left"><b>Passos:</b> @Html.DisplayFor(modelItem => item.Passos.Count)</p>
+                    @{
+                        var result = (item.classificacao / 5) * 100;
+
+                    }
+
+                    <b>Classificação:</b> <div class="media star-ratings-sprite"><span style="width:@result%" class="star-ratings-sprite-rating"></span></div>
+
+                </div>
+                <div class="col-sm">
+                    <p align="center"><b>Ingredientes:</b></p>
+                    @foreach (var ing in item.Ingredientes)
+                    {
+                        <p align="center">@Html.DisplayFor(modelItem => ing.descricao)</p>
+                    }
+
+                </div>
+
+
             </div>
         </div>
-    </div>
+
+        <div class="container" style="background-color:#E3F2FD">
+            <div class="row">
+                <div class="col-6">
+                    <ul class="share-buttons">
+                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="~/images/social_flat_rounded_rects_svg/Facebook.svg" /></a></li>
+                        <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="~/images/social_flat_rounded_rects_svg/Twitter.svg" /></a></li>
+                        <li><a href="http://www.tumblr.com/share?v=3&u=&quote=&s=" target="_blank" title="Post to Tumblr" onclick="window.open('http://www.tumblr.com/share?v=3&u=' + encodeURIComponent(document.URL) + '&quote=' +  encodeURIComponent(document.title)); return false;"><img alt="Post to Tumblr" src="~/images/social_flat_rounded_rects_svg/Tumblr.svg" /></a></li>
+                        <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="Pin it" onclick="window.open('http://pinterest.com/pin/create/button/?url=' + encodeURIComponent(document.URL) + '&description=' +  encodeURIComponent(document.title)); return false;"><img alt="Pin it" src="~/images/social_flat_rounded_rects_svg/Pinterest.svg" /></a></li>
+                        <li><a href="http://www.reddit.com/submit?url=&title=" target="_blank" title="Submit to Reddit" onclick="window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><img alt="Submit to Reddit" src="~/images/social_flat_rounded_rects_svg/Reddit.svg" /></a></li>
+                        <li><a href="mailto:?subject=&body=:%20" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="~/images/social_flat_rounded_rects_svg/Email.svg" /></a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger" />
+                    <input type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = item.id})'" />
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-warning" />
+                    <input type="button" value="Ver Receita" class="btn btn-warning" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = item.id})'" />
+                </div>
+            </div>
+        </div>
+    }
 }

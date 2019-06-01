@@ -5,9 +5,11 @@
 
     <div class="row px-2">
         <div class="col-sm">
+            <p></p>
             <img src="~/images/@Html.DisplayFor(modelItem => Model.imagem)" alt="@Html.DisplayFor(modelItem => Model.descricao)" width="300" height="300">
         </div>
         <div class="col-sm px-2">
+            <p></p>
             <p align="left"><b>Regime:</b> @Html.DisplayFor(modelItem => Model.regime)</p>
             <p align="left"><b>Tipo:</b> @Html.DisplayFor(modelItem => Model.tipo)</p>
             <p align="left"><b>Tempo de confeção:</b> @Html.DisplayFor(modelItem => Model.tempo.TotalMinutes) min. <i class="fas fa-clock"></i>

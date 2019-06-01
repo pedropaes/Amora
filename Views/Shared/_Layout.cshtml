@@ -62,16 +62,16 @@
                         <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Receitas" asp-action="Favoritos">Favoritos</a>
                     </li>
-                                <li>
-                                    <div class="ignore-css">
-                                        @using (Html.BeginForm("GetReceitaByString", "Receitas", new { @class = "form-inline" }))
-                                        {
-                                            @Html.TextBox("keyword")
-                                            <input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Procurar" />
-                                        }
+                        <li class="nav-item">
 
-                                    </div>
-                                </li>
+                            @using (Html.BeginForm("GetReceitaByString", "Receitas", new { @class = "form-inline " }))
+                            {
+                                @Html.TextBox("keyword")
+                                <input type="submit" class="btn btn-outline-success " value="Procurar" />
+                            }
+
+
+                        </li>
                             }
                         }
                         <li class="nav-item">
