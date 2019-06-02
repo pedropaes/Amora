@@ -1,7 +1,100 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 
+
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+        function wait(ms) {
+            var d = new Date();
+            var d2 = null;
+            do { d2 = new Date(); }
+            while (d2 - d < ms);
+        }
+
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+        var audio = new Audio('/sounds/beep.mp3');
+        var grammar = '#JSGF V1.0;'
+        var recognition = new SpeechRecognition();
+        var speechRecognitionList = new SpeechGrammarList();
+        speechRecognitionList.addFromString(grammar, 1);
+        recognition.grammars = speechRecognitionList;
+        recognition.lang = 'pt-PT';
+        recognition.interimResults = false;
+        window.onload = function () {
+            if (annyang) {
+                // Let's define a command.
+                console.log("It detected annyang");
+                var commands = {
+                    'eloise': function () {
+                        audio.play();
+
+                        recognition.start();
+
+                        wait(4000);
+
+
+
+                    }
+                };
+
+                // Add our commands to annyang
+                annyang.addCommands(commands);
+
+                // Start listening.
+                annyang.start();
+            }
+        }
+
+
+
+    </script>
+
+    <script>
+
+
+        recognition.onresult = function (event) {
+
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript;
+            document.getElementById('procura').setAttribute('value', command);
+            document.getElementById('procurar').click();
+            switch (command.toLowerCase()) {
+                case 'procura *tag':
+                    document.getElementById('procura').setAttribute('value', tag);
+                    alert('cdoijcd' + tag);
+                    break;
+                case 'anterior':
+                    document.getElementById('previous').click();
+                    break;
+
+                    break;
+                default:
+
+                // code block
+            }
+
+        };
+        recognition.onspeechend = function () {
+            recognition.stop();
+        };
+
+        recognition.onerror = function (event) {
+            message.textContent = 'Error occurred in recognition: ' + event.error;
+        }
+        document.querySelector('#btnGiveCommand').addEventListener('click', function () {
+            recognition.start();
+        });
+
+
+
+
+
+    </script>
+}
     <div class="text-center">
         <h1 class="display-4">Home Page</h1>
         <p>
@@ -18,5 +111,9 @@
         </p>
         <div class="form-group">
             <input type="button" value="Receita" class="btn btn-default btn-primary" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = 1})'" />
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-danger" />
+            <input type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("PrepararReceita", "Receitas",new { id = 1})'" />
         </div>
     </div>

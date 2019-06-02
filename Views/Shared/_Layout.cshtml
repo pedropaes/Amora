@@ -26,6 +26,7 @@
     <link href="~/css/stars.css" rel="stylesheet">
 
     <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+
 </head>
 <body>
     <header>
@@ -66,9 +67,10 @@
 
                             @using (Html.BeginForm("GetReceitaByString", "Receitas", new { @class = "form-inline " }))
                             {
-                                @Html.TextBox("keyword")
-                                <input type="submit" class="btn btn-outline-success " value="Procurar" />
+                                <input id="procura" name="keyword" type="text" >
+                                <input type="submit" class="btn btn-outline-success " id="procurar" value="Procurar" />
                             }
+
 
 
                         </li>
