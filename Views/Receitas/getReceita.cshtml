@@ -1,6 +1,29 @@
 ﻿@model ReceitaViewModel
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <link href="Bootstrap/css/star-rating.css" rel="stylesheet" />
+<script type='text/javascript' src="/js/eloise.js"></script>
+
+<script src="//code.responsivevoice.org/responsivevoice.js?key=3G053CLH"></script>
+
+<script>
+    function speak(input) {
+        responsiveVoice.speak(input, "Portuguese Female");
+    }
+
+    function wait(ms) {
+        var d = new Date();
+        var d2 = null;
+        do { d2 = new Date(); }
+        while (d2 - d < ms);
+    }
+
+    function executeAsync(func) {
+        setTimeout(func, 0);
+    }
+
+
+</script>
+
 <div class="container" style="background-color:#E3F2FD">
 
     <div class="row px-2">
@@ -35,7 +58,10 @@
                     </button>
                 </div>
             }
-
+            @if (User.Identity.IsAuthenticated)
+            {
+                <small>Adicionar aos favoritos: </small><a href='@Url.Action("SetFavorito", "Receitas", new { id_receita = Model.id})'><img src="~/images/favorite.png" height="30" width="30" /></a>
+            }
         </div>
         <div class="col-sm">
             <p align="center"><b>Ingredientes:</b></p>
@@ -62,7 +88,7 @@
             </ul>
         </div>
         <div class="col">
-            
+
         </div>
         <div class="col">
             <button type="button" class="btn btn-danger" />

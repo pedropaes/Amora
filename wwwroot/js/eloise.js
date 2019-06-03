@@ -8,13 +8,14 @@ function wait(ms) {
     do { d2 = new Date(); }
     while (d2 - d < ms);
 }
+
 window.onload = function () {
-    var numero = 1;
+    //var numero = 1;
     var audio = new Audio('/sounds/beep.mp3');
-    alert('passos:' + unescape(numero));
-    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga começar."];
-    var actual = 0;
-    var proximo;
+    //alert('passos:' + unescape(numero));
+    //var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga começar."];
+    //var actual = 0;
+    //var proximo;
     annyang.setLanguage('pt-PT');
     if (annyang) {
         // Let's define a command.
@@ -33,7 +34,10 @@ window.onload = function () {
             'anterior': previous,
             'volta': previous,
             'passo *num': passo,
+            'repete': repete,
+            'repetir': repete,
             'sair': sair,
+            'favorita': favorita,
         };
 
         function procura(tag) {
@@ -51,63 +55,78 @@ window.onload = function () {
                 document.getElementById('next').click();
                 speak(arr[actual]);
             }
-        }
+        };
+
+        function repete() {
+            speak(arr[actual]);
+        };
 
         function next() {
-            proximo = -1;
-            if (actual + proximo < 1) {
-                speak('não existe passo anterior');
+            proximo = 1;
+            if (actual > numero) {
+                speak('não é possível avançar');
             }
             else {
+                //alert("" + actual + " " + proximo + " " + numero);
                 actual = actual + proximo;
-                document.getElementById('previous').click();
+                document.getElementById('next').click();
                 speak(arr[actual]);
             }
-        }
+        };
 
         function previous() {
             proximo = -1;
             if (actual + proximo < 1) {
-                speak('não existe passo anterior');
+                speak('não existe anterior');
             }
             else {
-                actual = actual + proximo;
-                document.getElementById('previous').click();
-                speak(arr[actual]);
+                    actual = actual + proximo;
+                    document.getElementById('previous').click();
+                    speak(arr[actual]);
             }
-        }
-        function preparar() {
-            document.getElementById('preparar').click();
+        };
+
+            function preparar() {
+                document.getElementById('preparar').click();
+            };
+
+            function ver() {
+                document.getElementById('ver').click();
+            };
+
+            function tutorial() {
+                document.getElementById('tutorial').click();
+            };
+
+            function passo(num) {
+                $(document).ready(function () {
+                    $('#carouselExampleIndicators').carousel(parseInt(num));
+                });
+                if (parseInt(num) <= numero + 1) {
+                    actual = parseInt(num);
+                    speak(arr[actual]);
+                }
+                else speak('Passo não existe');
+            };
+
+            function sair() {
+                speak('Sair');
+                wait(1000);
+                document.getElementById('inicio').click();
+            };
+
+            function favorita() {
+                //audio.play();
+                //speak('A procurar ' + tag);
+                //wait(1000);
+                document.getElementById('favorita').click();
+            };
+
+            // Add our commands to annyang
+            annyang.addCommands(commands);
+
+            // Start listening.
+            annyang.start();
         }
 
-        function ver() {
-            document.getElementById('ver').click();
-        }
-        function tutorial() {
-            document.getElementById('tutorial').click();
-        }
-
-        function passo(num) {
-            $(document).ready(function () {
-                $('#carouselExampleIndicators').carousel(parseInt(num));
-            });
-            if (parseInt(num) <= numero + 1) {
-                actual = parseInt(command);
-                speak(arr[actual]);
-            }
-            else speak('Passo não existe!!!!');
-        }
-
-        function sair() {
-            speak('Sair');
-            wait(1000);
-            document.getElementById('inicio').click();
-        }
-        // Add our commands to annyang
-        annyang.addCommands(commands);
-
-        // Start listening.
-        annyang.start();
     }
-
-}

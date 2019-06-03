@@ -67,15 +67,16 @@ BULK INSERT Eloise.dbo.IngredienteReceita FROM 'C:\Users\Pedro\Desktop\Script\In
 SELECT * FROM Eloise.dbo.IngredienteReceita;
 
 --Povoamento Passo
-BULK INSERT Eloise.dbo.Passo FROM 'C:\Users\Pedro\Desktop\Script\Passos.csv'
+BULK INSERT Eloise.dbo.Passo FROM 'C:\Users\Pedro\source\repos\Eloise\Script\Passos.csv'
 	WITH (
-		ROWTERMINATOR = '\n',
+		ROWTERMINATOR = '|',
 		FIELDTERMINATOR = ';',
 		CODEPAGE = 'ACP',
 		KEEPIDENTITY
 	);
 
 SELECT * FROM Eloise.dbo.Passo;
+
 
 --Povoamento Receita
 BULK INSERT Eloise.dbo.Receita FROM 'C:\Users\Pedro\Desktop\Script\Receita.csv'

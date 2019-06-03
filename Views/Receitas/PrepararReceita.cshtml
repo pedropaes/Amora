@@ -3,7 +3,6 @@
 <script src="//code.responsivevoice.org/responsivevoice.js?key=3G053CLH"></script>
 
 <b>@Html.DisplayFor(modelItem => Model.descricao)</b>
-<p align="right"><span id='message'></span></p>
 
 <script>
     function speak(input) {
@@ -11,150 +10,13 @@
     }
 </script>
 
-<script charset="utf-8">
-
-
-
-        function wait(ms)
-         {
-            var d = new Date();
-            var d2 = null;
-            do { d2 = new Date(); }
-            while(d2-d < ms);
-        }
-
-            var numero = '@Model.Passos.Count';
-            alert('passos:' + unescape(numero));
-
-            var message = document.querySelector('#message');
-            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-            var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-            var audio = new Audio('/sounds/beep.mp3');
-            var grammar = '#JSGF V1.0;'
-            var recognition = new SpeechRecognition();
-            var speechRecognitionList = new SpeechGrammarList();
-            speechRecognitionList.addFromString(grammar, 1);
-            recognition.grammars = speechRecognitionList;
-            recognition.lang = 'pt-PT';
-            recognition.interimResults = false;
-            window.onload = function () {
-                if (annyang) {
-                // Let's define a command.
-                console.log("It detected annyang");
-                var commands = {
-                    'eloise': function () {
-                        audio.play();
-                        //wait(1000);
-                        recognition.start();
-
-                        wait(2500);
-
-                    }
-                };
-
-                // Add our commands to annyang
-                annyang.addCommands(commands);
-
-                // Start listening.
-                annyang.start();
-            }
-    }
-
-
-
-</script>
+<script type="text/javascript" src="~/js/eloise.js" charset="iso-8859-1"></script>
 
 <script charset="iso-8859-1">
-    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga Éloíse. Aguarde o sinal, e dite o comando começar."];
+    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga começar."];
+    var numero = '@Model.Passos.Count';
     var actual = 0;
     var proximo;
-
-    recognition.onresult = function (event) {
-        var last = event.results.length - 1;
-
-        var command = event.results[last][0].transcript;
-        //message.textContent = 'Comando: ' + command + '.';
-        var textonovo = decodeURIComponent(arr[3]);
-        switch (command.toLowerCase()) {
-            case 'próximo':
-                proximo = 1;
-
-                if (actual + proximo  > numero + 1) {
-                    speak('Não existem mais passos!');
-                }
-                else {
-                    actual += proximo;
-                    document.getElementById('next').click();
-                    speak(arr[actual]);
-                }
-                //alert("texto do array " + arr[actual - 1]);
-                break;
-            case 'anterior':
-                proximo = -1;
-                if (actual + proximo < 1) {
-                    speak('não existe passo anterior');
-                }
-                else {
-                    actual = actual + proximo;
-                    document.getElementById('previous').click();
-                    speak(arr[actual]);
-                }
-                //speak('anterior');
-                break;
-            case 'repete':
-                proximo = 1;
-
-                speak(arr[actual]);
-                break;
-            case 'começar':
-                if (actual == 0) {
-                    speak(arr[actual]);
-                    actual += 1;
-                    document.getElementById('next').click();
-                    speak(arr[actual]);
-                }
-                break;
-            case 'tutorial':
-                document.getElementById('tutorial').click();
-                break;
-            case 'sair':
-                document.getElementById('inicio').click();
-                break;
-            case (command.match(/^\d+$/) || {}).input:
-                $(document).ready(function () {
-                    $('#carouselExampleIndicators').carousel(parseInt(command));
-                });
-                if (parseInt(command) <= numero+1) {
-                    actual = parseInt(command);
-                    speak(arr[actual]);
-                }
-                else speak('Passo não existe!!!!');
-                break;
-            default:
-                break;
-            // code block
-        }
-
-    };
-    recognition.onspeechend = function () {
-        recognition.stop();
-    };
-
-    recognition.onerror = function (event) {
-        message.textContent = 'Error occurred in recognition: ' + event.error;
-    }
-    document.querySelector('#btnGiveCommand').addEventListener('click', function () {
-        recognition.start();
-    });
-
-
-
-
-
-</script>
-
-<script>
-    var numero = '@Model.Passos.Count';
 </script>
 
 <div class="container">
@@ -194,7 +56,7 @@
                             <ul style="list-style-type:none;">
                                 @foreach (var item in Model.Ingredientes)
                                 {
-                                    <li>@Html.DisplayFor(modelItem => item.descricao)</li>
+                                <li>@Html.DisplayFor(modelItem => item.descricao) </li>
                                 }
                             </ul>
                             <b>Quando estiver pronto para iniciar a receita diga 'Começar'</b>
@@ -208,8 +70,7 @@
                                 <h1>Passo  @Html.DisplayFor(modelItem => item.passo)</h1>
                                 <h2><p>@Html.DisplayFor(modelItem => item.tecnica)</p></h2>
                                 <script type="text/javascript" charset="utf-8">
-
-                                arr.push('@Html.Raw(item.tecnica)');
+                                    arr.push('@Html.Raw(item.tecnica)');
                                 </script>
                             </div>
                         </div>
@@ -219,10 +80,10 @@
                             <h1>Receita Concluída</h1>
                             <p><h2>Bom apetite!</h2></p>
                             <b>Não se esqueça de adicionar aos favoritos:</b>
-                            <p align="center"><img class="d-block" src="~/images/favorite.png" alt="First slide" width="35" height="35"></p>
+                            <p align="center"><a id="favorita" href='@Url.Action("SetFavorito", "Receitas", new { id_receita = Model.id})'><img class="d-block" src="~/images/favorite.png" alt="First slide" width="35" height="35"></a></p>
                             <script type="text/javascript" charset="utf-8">
 
-                                arr.push('A receita foi concluída, bom apetite! Se desejar adicionar a receita aos seus favoritos use o comando, Éloíse. Favorita.');
+                                arr.push('A receita foi concluída, bom apetite! Se desejar adicionar a receita aos seus favoritos use o comando, Favorita.');
                             </script>
                         </div>
                     </div>

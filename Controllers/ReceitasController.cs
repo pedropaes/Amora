@@ -236,6 +236,21 @@ namespace Eloise.Controllers
             return View("Lista", rvms);
         }
 
+        public  IActionResult  SetFavorito(int id_receita)
+        {
+            var userId = User.FindFirst(ClaimTypes.Sid).Value;
+            int id;
+            int.TryParse(userId, out id);
+            Favoritos f = new Favoritos();
+            f.id_Receita = id_receita;
+            f.id_Utilizador = id;
+            _context.Favoritos.Add(f);
+            _context.SaveChanges();
+            ReceitaViewModel receita = GetReceitaById(id_receita);
+            
+            return View("GetReceita", receita);
+        }
+
         public IActionResult GetReceitaByString(string keyword)
         {
             List<ReceitaViewModel> rvms = GetReceitaByIngrediente(keyword);

@@ -2,96 +2,44 @@
     ViewData["Title"] = "Home Page";
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script src="//code.responsivevoice.org/responsivevoice.js?key=3G053CLH"></script>
+
+<script>
+    function speak(input) {
+        responsiveVoice.speak(input, "Portuguese Female");
+    }
+
+    function wait(ms) {
+    var d = new Date();
+    var d2 = null;
+    do { d2 = new Date(); }
+    while (d2 - d < ms);
+    }
+
+    function executeAsync(func) {
+    setTimeout(func, 0);
+    }
+
+
+</script>
 
 
 @if (User.Identity.IsAuthenticated)
 {
-    <script>
-        function wait(ms) {
-            var d = new Date();
-            var d2 = null;
-            do { d2 = new Date(); }
-            while (d2 - d < ms);
-        }
-
-        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-        var audio = new Audio('/sounds/beep.mp3');
-        var grammar = '#JSGF V1.0;'
-        var recognition = new SpeechRecognition();
-        var speechRecognitionList = new SpeechGrammarList();
-        speechRecognitionList.addFromString(grammar, 1);
-        recognition.grammars = speechRecognitionList;
-        recognition.lang = 'pt-PT';
-        recognition.interimResults = false;
-        window.onload = function () {
-            if (annyang) {
-                // Let's define a command.
-                console.log("It detected annyang");
-                var commands = {
-                    'eloise': function () {
-                        audio.play();
-
-                        recognition.start();
-
-                        wait(4000);
-
-
-
-                    }
-                };
-
-                // Add our commands to annyang
-                annyang.addCommands(commands);
-
-                // Start listening.
-                annyang.start();
-            }
-        }
-
-
-
-    </script>
-
-    <script>
-
-
-        recognition.onresult = function (event) {
-
-            var last = event.results.length - 1;
-            var command = event.results[last][0].transcript;
-            document.getElementById('procura').setAttribute('value', command);
-            document.getElementById('procurar').click();
-
-        };
-        recognition.onspeechend = function () {
-            recognition.stop();
-        };
-
-        recognition.onerror = function (event) {
-            message.textContent = 'Error occurred in recognition: ' + event.error;
-        }
-        document.querySelector('#btnGiveCommand').addEventListener('click', function () {
-            recognition.start();
-        });
-
-
-
-
-
-    </script>
+    
+    <script type="text/javascript" src="~/js/eloise.js"></script>
 }
-    <div class="text-center">
-        <h1 class="display-4">Eloíse</h1>
-        
-    </div>
+<div class="text-center">
+    <h1 class="display-4">Eloíse</h1>
+
+</div>
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="~/images/fake/SweetSourChicken.jpg"
                  alt="First slide">
             <div class="carousel-caption">
-                
+
             </div>
         </div>
         <div class="carousel-item">
@@ -136,23 +84,5 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-    <p>
-        <a asp-controller="UserView" asp-action="getUsers">Ver utilizadores</a>
-    </p>
-    <p>
-        <a asp-controller="UserView" asp-action="RegisterUser">Registo</a>
-    </p>
-    <p>
-        <a asp-controller="Receitas" asp-action="GetReceitas">Ver Receitas</a>
-    </p>
-    <p>
-        <a asp-controller="Receitas" asp-action="GetReceita">Ver Receita 1</a>
-    </p>
-    <div class="form-group">
-        <input type="button" value="Receita" class="btn btn-default btn-primary" onclick="location.href='@Url.Action("GetReceita", "Receitas",new { id = 1})'" />
-    </div>
-    <div class="col">
-        <button type="button" class="btn btn-danger" />
-        <input type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("PrepararReceita", "Receitas",new { id = 1})'" />
-    </div>
+
 
