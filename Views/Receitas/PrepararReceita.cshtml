@@ -24,7 +24,7 @@
         }
 
             var numero = '@Model.Passos.Count';
-            //alert('passos:' + unescape(numero));
+            alert('passos:' + unescape(numero));
 
             var message = document.querySelector('#message');
             var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -153,7 +153,9 @@
 
 </script>
 
-
+<script>
+    var numero = '@Model.Passos.Count';
+</script>
 
 <div class="container">
 
@@ -195,7 +197,7 @@
                                     <li>@Html.DisplayFor(modelItem => item.descricao)</li>
                                 }
                             </ul>
-                            <b>Quando estiver pronto para iniciar a receita diga 'Eloíse' aguarde o sinal, e dite o comando 'Começar'</b>
+                            <b>Quando estiver pronto para iniciar a receita diga 'Começar'</b>
                         </div>
                     </div>
                     @foreach (var item in Model.Passos.Values)
