@@ -1,5 +1,5 @@
 ﻿@model ReceitaViewModel
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <link href="Bootstrap/css/star-rating.css" rel="stylesheet" />
 <div class="container" style="background-color:#E3F2FD">
 
@@ -66,7 +66,7 @@
         </div>
         <div class="col">
             <button type="button" class="btn btn-danger" />
-            <input type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("PrepararReceita", "Receitas",new { id = Model.id})'" />
+            <input id="preparar" type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("PrepararReceita", "Receitas",new { id = Model.id})'" />
         </div>
     </div>
 </div>

@@ -15,6 +15,11 @@ namespace Eloise.Controllers
             return View();
         }
 
+        public IActionResult Tutorial()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

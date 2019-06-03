@@ -15,7 +15,6 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.TagHelpers.inp
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.TagHelpers.output.cache
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Eloise.RazorCoreGenerate.cache
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
-C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -45,3 +44,5 @@ C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\getReceita.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\Lista.g.cshtml.cs
 C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Receitas\PrepararReceita.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Home\Tutorial.g.cshtml.cs
+C:\Users\Pedro\source\repos\Eloise\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs

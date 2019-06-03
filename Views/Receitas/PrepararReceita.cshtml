@@ -2,20 +2,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script src="//code.responsivevoice.org/responsivevoice.js?key=3G053CLH"></script>
 
-<br><br>
-<span id='message'></span>
-<br><br>
+<b>@Html.DisplayFor(modelItem => Model.descricao)</b>
+<p align="right"><span id='message'></span></p>
+
+<script>
+    function speak(input) {
+        responsiveVoice.speak(input, "Portuguese Female");
+    }
+</script>
+
+<script charset="utf-8">
 
 
-    <script>
-        function speak(input) {
-            responsiveVoice.speak(input, "Portuguese Female");
-        }
-    </script>
-
-    <script charset="utf-8">
-        
-        
 
         function wait(ms)
          {
@@ -27,7 +25,7 @@
 
             var numero = '@Model.Passos.Count';
             //alert('passos:' + unescape(numero));
-            
+
             var message = document.querySelector('#message');
             var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
             var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
@@ -64,124 +62,169 @@
 
 
 
-    </script>
+</script>
 
 <script charset="iso-8859-1">
-            var arr = ["Iniciar preparar receita"];
-            var actual = 0;
-            var proximo;
-            
-            recognition.onresult = function (event) {
-                var last = event.results.length - 1;
-                
-                var command = event.results[last][0].transcript;
-                message.textContent = 'Voice Input: ' + command + '.';
-                var textonovo = decodeURIComponent(arr[3]);
-                switch (command.toLowerCase()) {
-                    case 'próximo':
-                        proximo = 1;
-                        
-                        if (actual+proximo > numero) {
-                            speak('Receita concluida');
-                        }
-                        else {
-                            actual += proximo;
-                            document.getElementById('next').click();
-                            speak(arr[actual]);
-                        }
-                        //alert("texto do array " + arr[actual - 1]);
-                        break;
-                        case 'anterior':
-                        proximo = -1;
-                        if (actual+proximo < 0) {
-                            speak('não existe passo anterior');
-                        }
-                        else {
-                            actual = actual + proximo;
-                            document.getElementById('previous').click();
-                            speak(arr[actual]);
-                        }
-                        //speak('anterior');
-                        break;
-                    case (command.match(/^\d+$/) || {}).input:
-                        $(document).ready(function () {
-                            $('#carouselExampleIndicators').carousel(parseInt(command));  
-                        });
-                        if (parseInt(command) <= numero) {
-                            actual = parseInt(command);
-                            speak(arr[actual]);
-                        }
-                        else speak('Passo não existe!!!!');
-                        break;
-                    default:
-                        break;
-                    // code block
-                }
-                
-            };
-            recognition.onspeechend = function () {
-                recognition.stop();
-            };
-            
-            recognition.onerror = function (event) {
-                message.textContent = 'Error occurred in recognition: ' + event.error;
-            }
-            document.querySelector('#btnGiveCommand').addEventListener('click', function () {
-                recognition.start();
-            });
+    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga Éloíse. Aguarde o sinal, e dite o comando começar."];
+    var actual = 0;
+    var proximo;
 
-            
-   
-   
+    recognition.onresult = function (event) {
+        var last = event.results.length - 1;
+
+        var command = event.results[last][0].transcript;
+        //message.textContent = 'Comando: ' + command + '.';
+        var textonovo = decodeURIComponent(arr[3]);
+        switch (command.toLowerCase()) {
+            case 'próximo':
+                proximo = 1;
+
+                if (actual + proximo  > numero + 1) {
+                    speak('Não existem mais passos!');
+                }
+                else {
+                    actual += proximo;
+                    document.getElementById('next').click();
+                    speak(arr[actual]);
+                }
+                //alert("texto do array " + arr[actual - 1]);
+                break;
+            case 'anterior':
+                proximo = -1;
+                if (actual + proximo < 1) {
+                    speak('não existe passo anterior');
+                }
+                else {
+                    actual = actual + proximo;
+                    document.getElementById('previous').click();
+                    speak(arr[actual]);
+                }
+                //speak('anterior');
+                break;
+            case 'repete':
+                proximo = 1;
+
+                speak(arr[actual]);
+                break;
+            case 'começar':
+                if (actual == 0) {
+                    speak(arr[actual]);
+                    actual += 1;
+                    document.getElementById('next').click();
+                    speak(arr[actual]);
+                }
+                break;
+            case 'tutorial':
+                document.getElementById('tutorial').click();
+                break;
+            case 'sair':
+                document.getElementById('inicio').click();
+                break;
+            case (command.match(/^\d+$/) || {}).input:
+                $(document).ready(function () {
+                    $('#carouselExampleIndicators').carousel(parseInt(command));
+                });
+                if (parseInt(command) <= numero+1) {
+                    actual = parseInt(command);
+                    speak(arr[actual]);
+                }
+                else speak('Passo não existe!!!!');
+                break;
+            default:
+                break;
+            // code block
+        }
+
+    };
+    recognition.onspeechend = function () {
+        recognition.stop();
+    };
+
+    recognition.onerror = function (event) {
+        message.textContent = 'Error occurred in recognition: ' + event.error;
+    }
+    document.querySelector('#btnGiveCommand').addEventListener('click', function () {
+        recognition.start();
+    });
+
+
+
+
 
 </script>
 
 
 
 <div class="container">
-    @{
-        var text = "iniciar preparar receita";
-    }
+
+   
     <div class="row">
+
         <div class="col-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
                 @{
-                    var result = 100;
+                    var total = @Model.Passos.Count + 1;
                 }
                 <ol class="carousel-indicators">
                     @foreach (var item in Model.Passos.Values)
                     {
-                        
+
                         <li slidedata-target="#carouselExampleIndicators" data-slide-to="@Html.DisplayFor(modelItem => item.passo)" class="active"></li>
 
                     }
-
+                    <li slidedata-target="#carouselExampleIndicators" data-slide-to="@total" class="active"></li>
                 </ol>
+          
+                   
+                        
+
+                   
+
+          
                 <div class="carousel-inner">
+                    <script>speak(arr[0]);</script>
+
                     <img class="d-block w-100" src="~/images/background.png" alt="First slide" width="500" height="500">
                     <div class="carousel-item active">
                         <div class="carousel-caption d-none d-md-block">
-                            <h1>Iniciar preparar receita</h1>
-                            <script type="text/javascript" charset="utf-8">
-                                //speak('Iniciar preparar receita');
-                            </script>
+
+                            <b>Antes de iniciar a receita, certifique-se que tem todos os ingredientes:</b>
+                            <ul style="list-style-type:none;">
+                                @foreach (var item in Model.Ingredientes)
+                                {
+                                    <li>@Html.DisplayFor(modelItem => item.descricao)</li>
+                                }
+                            </ul>
+                            <b>Quando estiver pronto para iniciar a receita diga 'Eloíse' aguarde o sinal, e dite o comando 'Começar'</b>
                         </div>
                     </div>
                     @foreach (var item in Model.Passos.Values)
                     {
-                           
-                    <div class="carousel-item">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1>Passo  @Html.DisplayFor(modelItem => item.passo)</h1>
-                        <h2><p>@Html.DisplayFor(modelItem => item.tecnica)</p></h2>
-                        <script type="text/javascript" charset="utf-8">
-                            
+
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h1>Passo  @Html.DisplayFor(modelItem => item.passo)</h1>
+                                <h2><p>@Html.DisplayFor(modelItem => item.tecnica)</p></h2>
+                                <script type="text/javascript" charset="utf-8">
+
                                 arr.push('@Html.Raw(item.tecnica)');
-                        </script>
+                                </script>
+                            </div>
+                        </div>
+                    }
+                    <div class="carousel-item">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>Receita Concluída</h1>
+                            <p><h2>Bom apetite!</h2></p>
+                            <b>Não se esqueça de adicionar aos favoritos:</b>
+                            <p align="center"><img class="d-block" src="~/images/favorite.png" alt="First slide" width="35" height="35"></p>
+                            <script type="text/javascript" charset="utf-8">
+
+                                arr.push('A receita foi concluída, bom apetite! Se desejar adicionar a receita aos seus favoritos use o comando, Éloíse. Favorita.');
+                            </script>
+                        </div>
                     </div>
                 </div>
-                        }
-                    </div>
                 <a id='previous' class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -193,7 +236,7 @@
             </div>
         </div>
         <div class="col">
-            <img class="d-block w-100" src="~/images/@Html.DisplayFor(modelItem => Model.imagem)" alt="Second slide" width="500" height="500">
+            <img class=".d-none .d-lg-block .d-xl-none w-100" src="~/images/@Html.DisplayFor(modelItem => Model.imagem)" alt="Second slide" width="350" height="500">
         </div>
     </div>
 
