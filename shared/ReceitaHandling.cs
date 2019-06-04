@@ -39,7 +39,8 @@ namespace Eloise.shared
             rvm.tempo = receita.tempo;
             rvm.regime = receita.regime;
             rvm.tipo = receita.tipo;
-            rvm.valor = receita.valor;
+            rvm.Valor = _context.ValorNutricional.Find(receita.Valor);
+
 
             rvm.Ingredientes = _context.IngredienteReceita.Where(i => i.id_receita == receita.id).Select(ri => ri.Ingrediente).ToList();
 

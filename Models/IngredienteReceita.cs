@@ -15,6 +15,8 @@ namespace Eloise.Models
         [Key]
         public int id_receita { set; get; }
 
+        public string quantidade { set; get; }
+
         public Receita Receita { set; get; }
 
         public Ingrediente Ingrediente { set; get; }

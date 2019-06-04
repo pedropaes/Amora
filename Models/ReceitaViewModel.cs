@@ -22,14 +22,14 @@ namespace Eloise.Models
 
         public TimeSpan tempo { set; get; }
 
-        public int valor { set; get; }
-
+        public ValorNutricional Valor { set; get; }
 
         public int dose { set; get; }
 
         public double classificacao { set; get; }
 
         public string imagem { set; get; }
+
 
         public Dictionary<int, Passo> Passos { get; set; }
         

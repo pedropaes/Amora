@@ -32,9 +32,6 @@ namespace Eloise.Models
         [DataType(DataType.Time)]
         public TimeSpan tempo { set; get; }
 
-        [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
-        public int valor { set; get; }
 
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
@@ -47,6 +44,9 @@ namespace Eloise.Models
         [Required]
         [StringLength(50)]
         public string imagem { set; get; }
+
+        [Required]
+        public int  Valor { set; get; }
 
         public virtual ICollection<Passo> passos { get; set; }
 

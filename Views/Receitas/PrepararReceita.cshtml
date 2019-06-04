@@ -4,7 +4,7 @@
 
 <b>@Html.DisplayFor(modelItem => Model.descricao)</b>
 
-<script>
+<script  charset="iso-8859-1">
     function speak(input) {
         responsiveVoice.speak(input, "Portuguese Female");
     }
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="~/js/eloise.js" charset="iso-8859-1"></script>
 
 <script charset="iso-8859-1">
-    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga começar."];
+    var arr = ["Antes de iniciar a receita, certifique-se que tem todos os ingredientes.  Quando estiver pronto para iniciar a receita, diga iniciar ou seguinte. Se não tiver todos os ingredientes poderá descobrir a loja mais próxima através do comando loja."];
     var numero = '@Model.Passos.Count';
     var actual = 0;
     var proximo;
@@ -56,10 +56,12 @@
                             <ul style="list-style-type:none;">
                                 @foreach (var item in Model.Ingredientes)
                                 {
-                                <li>@Html.DisplayFor(modelItem => item.descricao) </li>
+                                    <li>@Html.DisplayFor(modelItem => item.descricao) </li>
                                 }
                             </ul>
-                            <b>Quando estiver pronto para iniciar a receita diga 'Começar'</b>
+                            <b>Quando estiver pronto para iniciar a receita diga 'Iniciar' ou 'Seguinte'</b>
+                            
+                            
                         </div>
                     </div>
                     @foreach (var item in Model.Passos.Values)
@@ -104,3 +106,6 @@
     </div>
 
 </div>
+<p></p>
+<p></p>
+<p align="center"><a id="loja" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/continente"><img class="d-block" src="~/images/button_loja.png" alt="First slide"></a></p>

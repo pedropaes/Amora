@@ -77,7 +77,7 @@
 </div>
 <div class="container" style="background-color:#E3F2FD">
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <ul class="share-buttons">
                 <li><a href="https://www.facebook.com/sharer/sharer.php?u=&quote=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="~/images/social_flat_rounded_rects_svg/Facebook.svg" /></a></li>
                 <li><a href="https://twitter.com/intent/tweet?source=&text=:%20" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="~/images/social_flat_rounded_rects_svg/Twitter.svg" /></a></li>
@@ -87,9 +87,15 @@
                 <li><a href="mailto:?subject=&body=:%20" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="~/images/social_flat_rounded_rects_svg/Email.svg" /></a></li>
             </ul>
         </div>
+       
         <div class="col">
-
+            <small><b>Nutrição:</b></small>
+            <small><b>Fat:</b>@Html.DisplayFor(modelItem => Model.Valor.Fat)</small>
+            <small><b>Kcal:</b>@Html.DisplayFor(modelItem => Model.Valor.Kcal)</small>
+            <small><b>Prot:</b>@Html.DisplayFor(modelItem => Model.Valor.Prot)</small>
+            <small><b>Carb:</b>@Html.DisplayFor(modelItem => Model.Valor.Carb)</small>
         </div>
+       
         <div class="col">
             <button type="button" class="btn btn-danger" />
             <input id="preparar" type="button" value="Preparar Receita" class="btn btn-danger" onclick="location.href='@Url.Action("PrepararReceita", "Receitas",new { id = Model.id})'" />

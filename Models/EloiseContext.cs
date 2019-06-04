@@ -18,6 +18,8 @@ namespace Eloise.Models
 
         public DbSet<Receita> Alergenio { get; set; }
 
+        public DbSet<ValorNutricional> ValorNutricional { get; set; }
+
         public DbSet<IngredienteAlergenio> IngredienteAlergenio { get; set; }
         public DbSet<Favoritos> Favoritos { get; set; }
 

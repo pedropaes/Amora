@@ -28,7 +28,7 @@ window.onload = function () {
             'preparar receita': preparar,
             'ver receita': ver,
             'tutorial': tutorial,
-            'começar': comecar,
+            'iniciar': comecar,
             'próximo': next,
             'seguinte': next,
             'anterior': previous,
@@ -38,6 +38,7 @@ window.onload = function () {
             'repetir': repete,
             'sair': sair,
             'favorita': favorita,
+            'loja': loja,
         };
 
         function procura(tag) {
@@ -113,6 +114,10 @@ window.onload = function () {
                 speak('Sair');
                 wait(1000);
                 document.getElementById('inicio').click();
+            };
+
+            function loja() {
+                document.getElementById('loja').click();
             };
 
             function favorita() {
