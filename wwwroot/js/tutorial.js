@@ -23,16 +23,10 @@ window.onload = function () {
         console.log("It detected annyang");
 
         var commands = {
-            'procura *tag': procura,
-            'procurar *tag': procura,
             'preparar receita': preparar,
             'ver receita': ver,
             'tutorial': tutorial,
             'começar': comecar,
-            'iniciar': comecar,
-            'próximo': next,
-            'seguinte': next,
-            'anterior': previous,
             'volta': previous,
             'passo *num': passo,
             'repete': repete,
@@ -42,13 +36,7 @@ window.onload = function () {
             'loja': loja,
         };
 
-        function procura(tag) {
-            //audio.play();
-            //speak('A procurar ' + tag);
-            //wait(1000);
-            document.getElementById('procura').setAttribute('value', tag);
-            document.getElementById('procurar').click();
-        };
+        
 
         function comecar() {
             if (actual == 0) {
@@ -63,18 +51,7 @@ window.onload = function () {
             speak(arr[actual]);
         };
 
-        function next() {
-            proximo = 1;
-            if (actual > numero) {
-                speak('não é possível avançar');
-            }
-            else {
-                //alert("" + actual + " " + proximo + " " + numero);
-                actual = actual + proximo;
-                document.getElementById('next').click();
-                speak(arr[actual]);
-            }
-        };
+        
 
         function previous() {
             proximo = -1;

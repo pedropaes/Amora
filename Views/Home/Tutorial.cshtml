@@ -9,93 +9,12 @@
     }
 </script>
 
+<script type="text/javascript" src="~/js/tutorial.js" charset="iso-8859-1"></script>
 
-<script>
-    function wait(ms) {
-        var d = new Date();
-        var d2 = null;
-        do { d2 = new Date(); }
-        while (d2 - d < ms);
-    }
-
-    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-    var audio = new Audio('/sounds/beep.mp3');
-    var grammar = '#JSGF V1.0;'
-    var recognition = new SpeechRecognition();
-    var speechRecognitionList = new SpeechGrammarList();
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
-    recognition.lang = 'pt-PT';
-    recognition.interimResults = false;
-    window.onload = function () {
-        if (annyang) {
-            // Let's define a command.
-            console.log("It detected annyang");
-            var commands = {
-                'eloise': function () {
-                    audio.play();
-
-                    recognition.start();
-
-                    wait(4000);
-
-
-
-                }
-            };
-
-            // Add our commands to annyang
-            annyang.addCommands(commands);
-
-            // Start listening.
-            annyang.start();
-        }
-    }
-
-
-
-</script>
-
-<script>
-
-
-    recognition.onresult = function (event) {
-
-        var last = event.results.length - 1;
-        var command = event.results[last][0].transcript;
-        document.getElementById('procura').setAttribute('value', command);
-        document.getElementById('procurar').click();
-        switch (command.toLowerCase()) {
-            case 'procura *tag':
-                document.getElementById('procura').setAttribute('value', tag);
-                alert('cdoijcd' + tag);
-                break;
-
-                break;
-            default:
-
-            // code block
-        }
-
-    };
-    recognition.onspeechend = function () {
-        recognition.stop();
-    };
-
-    recognition.onerror = function (event) {
-        message.textContent = 'Error occurred in recognition: ' + event.error;
-    }
-    document.querySelector('#btnGiveCommand').addEventListener('click', function () {
-        recognition.start();
-    });
-
-</script>
-
-<script>speak('Olá eu sou a Éloíse, consigo executar vários comandos de voz, e assistir o processo de preparação de uma receita. Poderá procurar uma receita usando o comando procurar. seguido do nome do ingrediente, ou descrição da receita. Durante a preparação da receita poderá usar os comandos. próximo. anterior. sair. repete.  Consulte a tabela abaixo para ver todos os comandos disponíveis. Quando terminar, experimente dizer procurar.  e  o nome de um qualquer ingrediente');</script>
+<script>speak('Olá eu sou a Éloíse, consigo executar vários comandos de voz, e assistir o processo de preparação de uma receita. Poderá procurar uma receita usando o comando procurar. seguido do nome do ingrediente, ou descrição da receita. Durante a preparação da receita poderá usar os comandos. seguinte. anterior. sair. repete. Consulte a tabela abaixo para ver todos os comandos disponíveis.');</script>
 <div class="text-center">
     <h1 class="display-4">Tutorial</h1>
-    <p> Olá eu sou a <b>Eloíse</b>, consigo executar vários comandos de voz e assistir o processo de prepração de uma receita. </p>
+    <p> Olá eu sou a <b>Eloíse</b>, consigo executar vários comandos de voz e assistir o processo de preparação de uma receita. </p>
 
     <p>Poderá procurar uma receita usando o comando procurar seguido de um ingrediente ou descrição da receita</p>
 
@@ -142,6 +61,10 @@
                 <tr>
                     <th scope="row">favorito</th>
                     <td>Adiciona a receita aos favoritos</td>
+                </tr>
+                <tr>
+                    <th scope="row">loja</th>
+                    <td>Encontrar a loja mais próxima</td>
                 </tr>
 
             </tbody>

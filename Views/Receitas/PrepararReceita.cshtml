@@ -4,7 +4,7 @@
 
 <b>@Html.DisplayFor(modelItem => Model.descricao)</b>
 
-<script  charset="iso-8859-1">
+<script  charset="utf-8">
     function speak(input) {
         responsiveVoice.speak(input, "Portuguese Female");
     }
@@ -56,7 +56,7 @@
                             <ul style="list-style-type:none;">
                                 @foreach (var item in Model.Ingredientes)
                                 {
-                                    <li>@Html.DisplayFor(modelItem => item.descricao) </li>
+                                <li>@Html.DisplayFor(modelItem => item.Key.descricao) - @Html.DisplayFor(modelItem => item.Value)</li>
                                 }
                             </ul>
                             <b>Quando estiver pronto para iniciar a receita diga 'Iniciar' ou 'Seguinte'</b>

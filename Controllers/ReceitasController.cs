@@ -199,6 +199,7 @@ namespace Eloise.Controllers
                 if (isContained)
                 {
                     rvm = handling.ReceitaToReceitaCompleta(rec);
+
                     rvms.Add(rvm);
                 }
             }

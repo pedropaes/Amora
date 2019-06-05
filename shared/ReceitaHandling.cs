@@ -20,7 +20,7 @@ namespace Eloise.shared
             List<Alergenio> Alergenios = new List<Alergenio>();
 
             
-            foreach (Ingrediente i in rvm.Ingredientes)
+            foreach (Ingrediente i in rvm.Ingredientes.Keys)
             {
                 var aler = _context.IngredienteAlergenio.Where(b => b.id_Ingrediente == i.id).Select(ai => ai.Alergenio).FirstOrDefault();
                 if (aler != null) Alergenios.Add(aler);
@@ -42,7 +42,19 @@ namespace Eloise.shared
             rvm.Valor = _context.ValorNutricional.Find(receita.Valor);
 
 
-            rvm.Ingredientes = _context.IngredienteReceita.Where(i => i.id_receita == receita.id).Select(ri => ri.Ingrediente).ToList();
+            var Ingredientes = _context.IngredienteReceita.Where(i => i.id_receita == receita.id).Select(ri => ri.Ingrediente).ToList();
+
+            
+
+            var quantidades = _context.IngredienteReceita.Where(i => i.id_receita == receita.id).Select(qi => qi.quantidade);
+
+            rvm.Ingredientes = new Dictionary<Ingrediente, string>();
+
+            foreach(Ingrediente i in Ingredientes)
+            {
+                var qtd = _context.IngredienteReceita.Where(ir => ir.id_receita == receita.id && ir.id_ingrediente == i.id).Select(qi => qi.quantidade).Single();
+                rvm.Ingredientes.Add(i, qtd);
+            }
 
             var passos = _context.Passo.Where(s => s.receitaid == receita.id);
             rvm.Passos = new Dictionary<int, Passo>();

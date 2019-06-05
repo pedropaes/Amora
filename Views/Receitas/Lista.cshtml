@@ -62,7 +62,7 @@ else
                     <p align="center"><b>Ingredientes:</b></p>
                     @foreach (var ing in item.Ingredientes)
                     {
-                        <p align="center">@Html.DisplayFor(modelItem => ing.descricao)</p>
+                        <p align="center">@Html.DisplayFor(modelItem => ing.Key.descricao)</p>
                     }
 
                 </div>
