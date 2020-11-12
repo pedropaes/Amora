@@ -1,5 +1,5 @@
 # __LI4__
-## Eloise - Assistente de cozinha controlado por voz
+## Amora - Assistente de cozinha controlado por voz
 
 Realizado no âmbito da discplina Laboratórios de Informática 4, __Eloise__ é uma  aplicação web desenvolvida em **ASP.NET Core** que possibilita a confecção de receitas usando unicamente a voz.
 
